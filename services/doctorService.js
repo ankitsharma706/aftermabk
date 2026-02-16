@@ -1,11 +1,12 @@
-const Doctor = require('../models/Doctor');
+const dataModel = require('../models/dataModel');
 
 const getAllDoctors = async () => {
-    return await Doctor.find({});
+    return dataModel.getDoctors();
 };
 
 const getDoctorById = async (id) => {
-    return await Doctor.findOne({ doctor_id: id });
+    const doctors = dataModel.getDoctors();
+    return doctors.find(d => d.doctor_id === id);
 };
 
 module.exports = {
