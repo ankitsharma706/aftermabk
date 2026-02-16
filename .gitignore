@@ -1,2 +1,10 @@
+<<<<<<< HEAD
 .env
 .node_modules
+=======
+node_modules
+.env
+*.o
+*.out
+*.exe
+>>>>>>> 49a3fa4 (Initial backend commit)
