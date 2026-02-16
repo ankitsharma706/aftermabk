@@ -1,0 +1,156 @@
+{
+  "person_profile": {
+    "person_id": 1,
+    "full_name": "Aditi Sharma",
+    "age": 29,
+    "delivery_type": "C-section",
+    "profile_picture_url": "/images/aditi.jpg",
+
+    "contact": {
+      "email": "aditi@example.com",
+      "phone": "+91-9876543210"
+    },
+
+    "family": {
+      "primary_contact_name": "Rohit Sharma",
+      "primary_contact_number": "+91-9123456789",
+      "family_member_name": "Neha Sharma",
+      "relationship": "Husband"
+    },
+
+    "preferences": {
+      "preferred_language": "Hindi",
+      "supported_languages": [
+        "English",
+        "Hindi",
+        "Telugu",
+        "Odia",
+        "Bengali",
+        "Tamil",
+        "Malayalam",
+        "Other"
+      ],
+      "preferred_reminder_time": "08:00",
+      "privacy_mode": "Private",
+      "data_visibility": ["Family", "Doctor"]
+    },
+
+    "subscription": {
+      "plan_name": "Active Pulse",
+      "plan_price": 199,
+      "plan_status": "Active",
+      "renewal_date": "2026-03-15"
+    }
+  },
+
+  "medical_profile": {
+    "medical_id": 201,
+    "person_id": 1,
+    "allergies": ["Penicillin"],
+    "medical_history": ["Thyroid imbalance"],
+    "current_medications": ["Iron supplements"],
+    "recovery_process": "Post C-section healing",
+
+    "doctor": {
+      "name": "Dr. Mehta",
+      "specialization": "OBGYN",
+      "hospital": "City Care Hospital"
+    },
+
+    "appointments": {
+      "last_visit": "2026-02-01",
+      "next_appointment": "2026-03-01",
+      "mode": "In-person"
+    }
+  },
+
+  "gentle_days_progress": {
+    "progress_id": 501,
+    "person_id": 1,
+    "recovery_day_count": 12,
+    "current_phase": "Stability",
+    "completion_percentage": 45,
+
+    "healing_metrics": {
+      "healing_pulse": 78,
+      "pain_level": 3,
+      "mood": "Calm",
+      "energy_level": "Moderate",
+      "sleep_quality": "Improving"
+    },
+
+    "daily_care": {
+      "hydration": true,
+      "self_care": true,
+      "gentle_care": true,
+      "warm_nutrition": true,
+      "recommended_activity": "Deep breathing",
+      "session_duration_minutes": 5
+    },
+
+    "nutrition": {
+      "iron_rich_foods": ["Ragi", "Spinach", "Beetroot"],
+      "digestive_support": ["Ajwain water", "Jeera water"],
+      "today_meal_compliance": true
+    },
+
+    "mental_wellness": {
+      "mood_check_completed": true,
+      "journal_entry": false,
+      "stress_level": "Low",
+      "calm_exercises_done": true
+    },
+
+    "analytics": {
+      "mood_trend": "Improving",
+      "weekly_average_mood": "Stable",
+      "pain_trend": "Decreasing",
+      "recovery_score": 82
+    },
+
+    "visibility": {
+      "mode": "Private",
+      "shared_with": ["Doctor"]
+    },
+
+    "timestamps": {
+      "last_updated": "2026-02-14T08:30:00Z",
+      "progress_date": "2026-02-14"
+    }
+  },
+
+  "care_circle": {
+    "joined": true,
+    "distance_km": 12,
+    "available_experts": [
+      "OBGYN",
+      "Lactation Expert",
+      "Physiotherapist",
+      "Mental Wellness Coach"
+    ],
+    "upcoming_sessions": [
+      {
+        "type": "Group Healing Circle",
+        "date": "2026-02-16",
+        "time": "15:00"
+      }
+    ]
+  },
+
+  "resource_library": {
+    "recommended_today": [
+      {
+        "title": "Gentle Breathing for Recovery",
+        "category": "Guided Video",
+        "duration_minutes": 5
+      }
+    ],
+    "categories": [
+      "Guided Videos",
+      "Health Tips",
+      "Medication Safety",
+      "Nutrition",
+      "Mental Wellness"
+    ]
+  }
+}

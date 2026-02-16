@@ -1,0 +1,64 @@
+{
+  "doctors": [
+    {
+      "doctor_id": 1,
+      "full_name": "Dr. Meera Nair",
+      "profile_picture_url": "/images/doctors/meera_nair.jpg",
+      "specialization": "Physiotherapist",
+      "expertise_area": "Pelvic Floor Rehabilitation",
+      "cost_per_minute": 15.00,
+      "currency": "INR",
+      "years_of_experience": 8,
+      "rating": 4.8,
+      "available_online": true
+    },
+    {
+      "doctor_id": 2,
+      "full_name": "Dr. Ritu Sharma",
+      "profile_picture_url": "/images/doctors/ritu_sharma.jpg",
+      "specialization": "Women's Health Physiotherapist",
+      "expertise_area": "Postpartum Core Recovery",
+      "cost_per_minute": 14.00,
+      "currency": "INR",
+      "years_of_experience": 10,
+      "rating": 4.7,
+      "available_online": true
+    },
+    {
+      "doctor_id": 3,
+      "full_name": "Dr. Ananya Rao",
+      "profile_picture_url": "/images/doctors/ananya_rao.jpg",
+      "specialization": "Pelvic Floor Therapist",
+      "expertise_area": "Bladder Control & Muscle Strengthening",
+      "cost_per_minute": 16.50,
+      "currency": "INR",
+      "years_of_experience": 7,
+      "rating": 4.9,
+      "available_online": false
+    },
+    {
+      "doctor_id": 4,
+      "full_name": "Dr. Kavita Menon",
+      "profile_picture_url": "/images/doctors/kavita_menon.jpg",
+      "specialization": "OBGYN",
+      "expertise_area": "Postpartum Recovery & Healing",
+      "cost_per_minute": 20.00,
+      "currency": "INR",
+      "years_of_experience": 12,
+      "rating": 4.6,
+      "available_online": true
+    },
+    {
+      "doctor_id": 5,
+      "full_name": "Dr. Sneha Patel",
+      "profile_picture_url": "/images/doctors/sneha_patel.jpg",
+      "specialization": "Lactation Consultant",
+      "expertise_area": "Breastfeeding Support & Maternal Care",
+      "cost_per_minute": 13.00,
+      "currency": "INR",
+      "years_of_experience": 9,
+      "rating": 4.5,
+      "available_online": true
+    }
+  ]
+}
