@@ -1,0 +1,134 @@
+[
+  {
+    "plan_id": "plan-001",
+    "bank_name": "SBI",
+    "scheme_name": "Janani Raksha Health Cover",
+    "category": "Maternity",
+    "min_age": 18,
+    "max_age": 45,
+    "approval_rate": 88,
+    "processing_days": 5,
+    "clients_served": 12000,
+    "coverage_min": 100000,
+    "coverage_max": 1000000,
+    "currency": "INR",
+    "features": [
+      "Full Hospitalization",
+      "Mental Health Support",
+      "In-Home Nursing"
+    ],
+    "eligibility_criteria": "Women 18+, pregnancy confirmed",
+    "active": true,
+    "created_at": "2026-03-02T12:00:00Z"
+  },
+  {
+    "plan_id": "plan-002",
+    "bank_name": "HDFC Bank",
+    "scheme_name": "Maternity Extension Plan",
+    "category": "Maternity",
+    "min_age": 21,
+    "max_age": 40,
+    "approval_rate": 92,
+    "processing_days": 3,
+    "clients_served": 18000,
+    "coverage_min": 150000,
+    "coverage_max": 1500000,
+    "currency": "INR",
+    "features": [
+      "Cashless Recovery Assist",
+      "Expert Consultations",
+      "Medication Coverage"
+    ],
+    "eligibility_criteria": "Policyholder with base health plan",
+    "active": true,
+    "created_at": "2026-03-02T12:00:00Z"
+  },
+  {
+    "plan_id": "plan-003",
+    "bank_name": "ICICI Bank",
+    "scheme_name": "New Mother Essential",
+    "category": "Postpartum",
+    "min_age": 18,
+    "max_age": 42,
+    "approval_rate": 78,
+    "processing_days": 4,
+    "clients_served": 8000,
+    "coverage_min": 100000,
+    "coverage_max": 800000,
+    "currency": "INR",
+    "features": [
+      "Postpartum Physio Inclusion",
+      "Safe Shield Protection",
+      "Lactation Specialist Access"
+    ],
+    "eligibility_criteria": "Applicable within 6 months postpartum",
+    "active": true,
+    "created_at": "2026-03-02T12:00:00Z"
+  },
+  {
+    "plan_id": "plan-004",
+    "bank_name": "Axis Bank",
+    "scheme_name": "Afterma Wellness Plan",
+    "category": "Wellness",
+    "min_age": 25,
+    "max_age": 45,
+    "approval_rate": 85,
+    "processing_days": 6,
+    "clients_served": 10000,
+    "coverage_min": 200000,
+    "coverage_max": 2000000,
+    "currency": "INR",
+    "features": [
+      "Priority Triage Assist",
+      "Holistic Wellness Rider",
+      "Emergency Red Flag Cover"
+    ],
+    "eligibility_criteria": "Age 25+, postpartum up to 1 year",
+    "active": true,
+    "created_at": "2026-03-02T12:00:00Z"
+  },
+  {
+    "plan_id": "plan-005",
+    "bank_name": "Kotak Mahindra",
+    "scheme_name": "Secure Mother Shield",
+    "category": "Maternity",
+    "min_age": 20,
+    "max_age": 40,
+    "approval_rate": 81,
+    "processing_days": 5,
+    "clients_served": 9500,
+    "coverage_min": 120000,
+    "coverage_max": 1200000,
+    "currency": "INR",
+    "features": [
+      "NICU Coverage",
+      "Doctor Follow-Up Cover",
+      "Home Recovery Assistance"
+    ],
+    "eligibility_criteria": "Pregnancy within 3 months of policy start",
+    "active": true,
+    "created_at": "2026-03-02T12:00:00Z"
+  },
+  {
+    "plan_id": "plan-006",
+    "bank_name": "TATA AIG",
+    "scheme_name": "Comprehensive Mother Care",
+    "category": "Premium",
+    "min_age": 18,
+    "max_age": 45,
+    "approval_rate": 90,
+    "processing_days": 4,
+    "clients_served": 15000,
+    "coverage_min": 250000,
+    "coverage_max": 2500000,
+    "currency": "INR",
+    "features": [
+      "Complete Delivery Coverage",
+      "Mental Health Therapy Cover",
+      "Pelvic Rehab Coverage"
+    ],
+    "eligibility_criteria": "Women 18–45 with maternity needs",
+    "active": true,
+    "created_at": "2026-03-02T12:00:00Z"
+  }
+]

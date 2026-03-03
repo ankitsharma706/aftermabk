@@ -1,0 +1,82 @@
+[
+  {
+    "community_id": "c001-uuid-0001",
+    "title": "New Moms Bonding",
+    "short_description": "Sharing the joys and struggles of the first few months.",
+    "member_count": 124,
+    "active": true,
+    "created_at": "2026-03-02T12:00:00Z"
+  },
+  {
+    "community_id": "c001-uuid-0002",
+    "title": "Sleep Solutions",
+    "short_description": "Tips and support for the sleepless nights.",
+    "member_count": 89,
+    "active": true,
+    "created_at": "2026-03-02T12:00:00Z"
+  },
+  {
+    "community_id": "c001-uuid-0003",
+    "title": "Emotional Overwhelm",
+    "short_description": "A safe space to talk about the harder days.",
+    "member_count": 56,
+    "active": true,
+    "created_at": "2026-03-02T12:00:00Z"
+  },
+  {
+    "community_id": "c001-uuid-0004",
+    "title": "Breastfeeding Support",
+    "short_description": "Guidance and encouragement for nursing mothers.",
+    "member_count": 142,
+    "active": true,
+    "created_at": "2026-03-02T12:00:00Z"
+  },
+  {
+    "community_id": "c001-uuid-0005",
+    "title": "C-Section Recovery Circle",
+    "short_description": "Support for mothers recovering from cesarean birth.",
+    "member_count": 73,
+    "active": true,
+    "created_at": "2026-03-02T12:00:00Z"
+  },
+  {
+    "community_id": "c001-uuid-0006",
+    "title": "Postpartum Fitness",
+    "short_description": "Gentle workouts and pelvic strengthening guidance.",
+    "member_count": 91,
+    "active": true,
+    "created_at": "2026-03-02T12:00:00Z"
+  },
+  {
+    "community_id": "c001-uuid-0007",
+    "title": "Nutrition for Recovery",
+    "short_description": "Meal ideas and dietary tips for healing and energy.",
+    "member_count": 64,
+    "active": true,
+    "created_at": "2026-03-02T12:00:00Z"
+  },
+  {
+    "community_id": "c001-uuid-0008",
+    "title": "First-Time Mothers",
+    "short_description": "Advice and reassurance for navigating motherhood for the first time.",
+    "member_count": 158,
+    "active": true,
+    "created_at": "2026-03-02T12:00:00Z"
+  },
+  {
+    "community_id": "c001-uuid-0009",
+    "title": "Managing Baby Blues",
+    "short_description": "Open discussions about mood changes and mental wellness.",
+    "member_count": 77,
+    "active": true,
+    "created_at": "2026-03-02T12:00:00Z"
+  },
+  {
+    "community_id": "c001-uuid-0010",
+    "title": "Working Moms Transition",
+    "short_description": "Balancing career and new motherhood together.",
+    "member_count": 102,
+    "active": true,
+    "created_at": "2026-03-02T12:00:00Z"
+  }
+]

@@ -1,0 +1,61 @@
+{
+  "user_id": "02183756",
+  "profile": {
+    "name": "aditi Sharma",
+    "dob": "2000-01-01",
+    "email":"ankit@gmail.com",
+    "medical_history": "None",
+    "allergies": "Penicillin",
+    "maternity_stage": "Postpartum",
+    "delivery_method": "Normal",
+    "daily_condition_times": "10"
+  },
+  "caregiver": {
+    "name": "roshan Sharma",
+    "relationship": "Hubby",
+    "emergency_contact": "9876543210",
+    "phone_no": "9876543210",
+    "husband_contact_no": "9876543211"
+  },
+  "daily_habits": {
+    "sleep_hours": 7,
+    "water_cups_per_day": 8,
+    "daily_vitals_recorded": true
+  },
+  "period_cycle_logs": {
+    "flow_intensity": "medium",
+    "ovulation_window": true,
+    "cramps_severity": 6,
+    "associated_symptoms": [
+      "Back pain",
+      "Breast pain",
+      "Pelvic pressure",
+      "Headache"
+    ]
+  },
+  "wellbeing_scores": {
+    "mood_balance": 7,
+    "pain_intensity": 5,
+    "energy_level": 6
+  },
+  "medical_notes": {
+    "doctor_notes": "Patient recovering well",
+    "symptoms_cluster": [
+      "Nausea",
+      "Aching",
+      "Swelling",
+      "Insomnia",
+      "Cramps",
+      "Bloating"
+    ]
+  },
+  "recent_observations":{
+    "count":"observations.length",
+    "obsevations":{
+      "id_":"",      
+      "timestamps":"32421468721"
+
+    }
+  },
+  "created_at": "2026-03-02T12:00:00Z"
+}

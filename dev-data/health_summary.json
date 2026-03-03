@@ -1,0 +1,44 @@
+{
+  "summary_id": "generated-uuid",
+  "user_id": "user-uuid",
+  "date": "2026-03-03",
+  "core_metrics": {
+    "hydration_ratio": 52,
+    "sleep_quality": 76,
+    "pelvic_index": 0.4,
+    "activity_load": 8
+  },
+  "readiness_indices": {
+    "tissue_restoration": 82,
+    "pelvic_resilience": 100,
+    "core_alignment": 85
+  },
+  "behavioral_patterns": {
+    "hydration_adherence": 90,
+    "rest_efficiency": 70
+  },
+  "pain_assessment": {
+    "pain_intensity": 4,
+    "cramps_severity": 3,
+    "pelvic_pressure": false
+  },
+  "cycle_health": {
+    "flow_intensity": "medium",
+    "ovulation_window": true,
+    "associated_symptoms": [
+      "Back pain",
+      "Breast tenderness"
+    ]
+  },
+  "risk_assessment": {
+    "afterma_readiness_score": 81,
+    "risk_level": "Stable",
+    "alerts": []
+  },
+  "ai_flags": {
+    "doctor_consultation_needed": false,
+    "hydration_improvement_suggested": true,
+    "rest_improvement_suggested": false
+  },
+  "created_at": "2026-03-03T12:00:00Z"
+}
