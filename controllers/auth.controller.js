@@ -1,7 +1,7 @@
 'use strict';
 
 const bcrypt = require('bcryptjs');
-const { User } = require('../models');
+const { User, Doctor } = require('../models');
 const config = require('../config/config');
 const { generateToken, generateRefreshToken, verifyRefreshToken, sanitizeUser } = require('../utils/helpers');
 const { createError } = require('../middleware/error.middleware');
@@ -17,7 +17,8 @@ if (config.twilio.accountSid && config.twilio.authToken) {
 // ─────────────────────────────────────────────────────────────
 const register = async (req, res, next) => {
     try {
-        const { email, password, full_name, maternity_stage, delivery_method, dob, phone } = req.body;
+        const { email, password, full_name, maternity_stage, delivery_method, dob, phone, role } = req.body;
+        const isDoctor = role === 'doctor';
 
         // Check duplicate email
         const existing = await User.findOne({ email: email.toLowerCase() });
@@ -37,14 +38,25 @@ const register = async (req, res, next) => {
             delivery_method: delivery_method || 'Unknown',
             dob,
             auth_provider: 'local',
+            role: isDoctor ? 'doctor' : 'user',
         });
+
+        // If signing up as a doctor, create a Doctor profile record in the Doctor collection
+        if (isDoctor) {
+            await Doctor.create({
+                name: full_name,
+                email: email.toLowerCase(),
+                phone: phone || '',
+                specialization: 'General', // doctor updates this later from their profile settings
+            });
+        }
 
         const token = generateToken({ _id: user._id, email: user.email, role: user.role });
         const refreshToken = generateRefreshToken({ _id: user._id });
 
         return res.status(201).json({
             status: 'success',
-            message: 'Account created successfully.',
+            message: isDoctor ? 'Doctor account created successfully.' : 'Account created successfully.',
             data: {
                 user: sanitizeUser(user),
                 token,
@@ -291,7 +303,8 @@ const verifyOtp = async (req, res, next) => {
             return next(createError('Twilio is not configured on the server.', 500));
         }
 
-        const { phone, code } = req.body;
+        const { phone, code, role } = req.body;
+        const isDoctor = role === 'doctor';
 
         const verification_check = await twilioClient.verify.v2
             .services(config.twilio.verifyServiceSid)
@@ -306,13 +319,23 @@ const verifyOtp = async (req, res, next) => {
         let user = await User.findOne({ phone: phone });
 
         if (!user) {
-            // Register new user with just the phone number
+            // Register new user via OTP
             user = await User.create({
                 phone: phone,
                 auth_provider: 'twilio',
                 is_verified: true,
-                full_name: 'Twilio User', // default name
+                full_name: isDoctor ? 'Dr. User' : 'Twilio User',
+                role: isDoctor ? 'doctor' : 'user',
             });
+
+            // If signing up as a doctor via phone, create a Doctor profile record
+            if (isDoctor) {
+                await Doctor.create({
+                    name: user.full_name,
+                    phone: phone,
+                    specialization: 'General',
+                });
+            }
         } else {
             // Login existing user
             user.is_verified = true;
