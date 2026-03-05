@@ -1,0 +1,47 @@
+[
+  {
+    "timestamp": "2026-03-04T08:00:00Z",
+    "feeding_type": "breast",
+    "side": "left",
+    "milk_quantity_ml": 100,
+    "duration_minutes": 15,
+    "baby_response": "happy",
+    "notes": "Good latch, baby fed well"
+  },
+  {
+    "timestamp": "2026-03-04T11:30:00Z",
+    "feeding_type": "breast",
+    "side": "right",
+    "milk_quantity_ml": 90,
+    "duration_minutes": 12,
+    "baby_response": "sleepy",
+    "notes": "Fell asleep mid-feed"
+  },
+  {
+    "timestamp": "2026-03-04T15:00:00Z",
+    "feeding_type": "bottle",
+    "side": "both",
+    "milk_quantity_ml": 120,
+    "duration_minutes": 10,
+    "baby_response": "happy",
+    "notes": ""
+  },
+  {
+    "timestamp": "2026-03-04T20:00:00Z",
+    "feeding_type": "pump",
+    "side": "both",
+    "milk_quantity_ml": 80,
+    "duration_minutes": 20,
+    "baby_response": "",
+    "notes": "Stored for night feed"
+  },
+  {
+    "timestamp": "2026-03-05T07:00:00Z",
+    "feeding_type": "breast",
+    "side": "left",
+    "milk_quantity_ml": 110,
+    "duration_minutes": 14,
+    "baby_response": "happy",
+    "notes": "Morning feed, both rested well"
+  }
+]

@@ -14,7 +14,8 @@ dist-ssr
 *.local
 .env
 .env.example
-
+users-check.json
+test-patch
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

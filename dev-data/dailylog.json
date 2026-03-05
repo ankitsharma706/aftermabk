@@ -1,57 +1,92 @@
-{
-  "log_id": "log-uuid",
-  "user_id": "user-uuid",
-  "daily_logs": [
-    {
-      "log_id": "log-uuid",
-      "date": "2026-02-20",
-      "journal_entry1": "true",
-      "journal_entry_duration1": "5min",  
-      "journal_entry_intesitity1": "light",  
-      "journal_entry2": "true",
-      "journal_entry_duration2": "5min",
-      "journal_entry_intesitity2": "moderate",
-      "journal_entry3": "true",
-      "journal_entry_duration3": "5min",
-      "journal_entry_intesitity3": "light",
-      "journal_entry4": "true",
-      "journal_entry_duration4": "5min",
-      "journal_entry_intesitity4": "strong",
-      "journal_entry5": "true",
-      "journal_entry_duration5": "5min",
-      "journal_entry_intesitity5": "light"
-    
-    },
-    {
-      "log_id": "log-uuid",
-      "date": "2026-02-21",
-      "journal_entry1": "true",
-      "journal_entry_duration1": "5min",
-      "journal_entry_intesitity1": "light",
-      "journal_entry2": "true",
-      "journal_entry_duration2": "5min",
-      "journal_entry_intesitity2": "light",
-      "journal_entry3": "true",
-      "journal_entry_duration3": "5min",
-      "journal_entry_intesitity3": "light",
-      "journal_entry4": "true",
-      "journal_entry_duration4": "5min",
-      "journal_entry_intesitity4": "light",
-      "journal_entry5": "true",
-      "journal_entry_duration5": "5min",
-      "journal_entry_intesitity5": "light"
-    }
-  ],
-  "daily_log_summary": {
-    "logs_recorded": 2,
-    "average_sleep_hours": 6,
-    "average_water_cups": 5,
-    "average_pain_level": 2,
-    "average_mood_score": 5.5,
-    "average_energy_level": 5
+[
+  {
+    "date": "2026-02-28",
+    "mood_score": 6,
+    "pain_level": 3,
+    "sleep_hours": 6.5,
+    "water_cups": 6,
+    "energy_level": 5,
+    "activity_level": "light",
+    "symptoms": [
+      "fatigue",
+      "back_pain"
+    ],
+    "notes": "Feeling a bit tired today but managed a short walk."
   },
-  "timestamps": {
-    "last_updated": "2026-02-21T21:00:00Z",
-    "created_at": "2026-02-20T21:00:00Z"
+  {
+    "date": "2026-03-01",
+    "mood_score": 7,
+    "pain_level": 2,
+    "sleep_hours": 7,
+    "water_cups": 7,
+    "energy_level": 6,
+    "activity_level": "light",
+    "symptoms": [
+      "back_pain"
+    ],
+    "notes": "Better sleep last night. Did some stretches."
+  },
+  {
+    "date": "2026-03-02",
+    "mood_score": 5,
+    "pain_level": 4,
+    "sleep_hours": 5,
+    "water_cups": 4,
+    "energy_level": 4,
+    "activity_level": "none",
+    "symptoms": [
+      "fatigue",
+      "dizziness",
+      "headache"
+    ],
+    "notes": "Baby was very restless. Feeling drained."
+  },
+  {
+    "date": "2026-03-03",
+    "mood_score": 7,
+    "pain_level": 2,
+    "sleep_hours": 7.5,
+    "water_cups": 8,
+    "energy_level": 7,
+    "activity_level": "moderate",
+    "symptoms": [],
+    "notes": "Good day overall. Had a healthy lunch."
+  },
+  {
+    "date": "2026-03-04",
+    "mood_score": 6,
+    "pain_level": 3,
+    "sleep_hours": 6,
+    "water_cups": 5,
+    "energy_level": 5,
+    "activity_level": "light",
+    "symptoms": [
+      "back_pain"
+    ],
+    "notes": "Lower back pain after carrying baby for long."
+  },
+  {
+    "date": "2026-03-05",
+    "mood_score": 8,
+    "pain_level": 1,
+    "sleep_hours": 8,
+    "water_cups": 8,
+    "energy_level": 8,
+    "activity_level": "moderate",
+    "symptoms": [],
+    "notes": "Best day this week. Felt energized and positive."
+  },
+  {
+    "date": "2026-03-06",
+    "mood_score": 7,
+    "pain_level": 2,
+    "sleep_hours": 7,
+    "water_cups": 7,
+    "energy_level": 6,
+    "activity_level": "light",
+    "symptoms": [
+      "fatigue"
+    ],
+    "notes": "Mild fatigue. Took an afternoon nap."
   }
-}
+]

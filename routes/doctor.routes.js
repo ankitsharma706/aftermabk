@@ -1,39 +1,25 @@
 'use strict';
-
-const express = require('express');
-const router = express.Router();
-const { body } = require('express-validator');
-const { validate } = require('../middleware/validate.middleware');
+const router = require('express').Router();
+const ctrl = require('../controllers/doctor.controller');
 const { protect, restrictTo } = require('../middleware/auth.middleware');
-const {
-    createDoctor,
-    getAllDoctors,
-    getDoctorById,
-    updateDoctor,
-    deleteDoctor,
-} = require('../controllers/doctor.controller');
 
-const doctorRules = [
-    body('name').trim().isLength({ min: 2, max: 150 }).withMessage('Doctor name required.'),
-    body('specialization').notEmpty().withMessage('Specialization required.'),
-    body('session_fee').optional().isFloat({ min: 0 }),
-    body('rating').optional().isFloat({ min: 0, max: 5 }),
-    body('experience_years').optional().isInt({ min: 0 }),
-];
+// ── Doctor self-service (requires doctor JWT) ────────────────────────────────
+// IMPORTANT: these must be registered BEFORE /:id to avoid 'me' being treated as an ID
+router.get('/me', protect, restrictTo('doctor'), ctrl.getMe);          // GET    /api/doctors/me
+router.patch('/me', protect, restrictTo('doctor'), ctrl.updateMe);       // PATCH  /api/doctors/me
+router.patch('/me/password', protect, restrictTo('doctor'), ctrl.changePassword); // PATCH  /api/doctors/me/password
+router.delete('/me', protect, restrictTo('doctor'), ctrl.deleteMe);       // DELETE /api/doctors/me  (soft)
 
-// GET  /api/doctors          (public)
-router.get('/', getAllDoctors);
+// ── Public routes (no auth needed) ──────────────────────────────────────────
+router.get('/', ctrl.getAll);           // GET  /api/doctors?specialization=&location=&available=&page=&limit=
+router.get('/:id', ctrl.getById);      // GET  /api/doctors/:id
 
-// GET  /api/doctors/:doctorId  (public)
-router.get('/:doctorId', getDoctorById);
+// ── Admin only ───────────────────────────────────────────────────────────────
+router.use(protect, restrictTo('admin'));
 
-// POST /api/doctors           (admin only)
-router.post('/', protect, restrictTo('admin'), doctorRules, validate, createDoctor);
-
-// PATCH /api/doctors/:doctorId (admin only)
-router.patch('/:doctorId', protect, restrictTo('admin'), updateDoctor);
-
-// DELETE /api/doctors/:doctorId (admin only)
-router.delete('/:doctorId', protect, restrictTo('admin'), deleteDoctor);
+router.post('/', ctrl.create);               // POST   /api/doctors
+router.patch('/:id', ctrl.update);           // PATCH  /api/doctors/:id
+router.delete('/:id', ctrl.remove);          // DELETE /api/doctors/:id        (soft: active=false)
+router.delete('/:id/hard', ctrl.hardDelete); // DELETE /api/doctors/:id/hard  (permanent)
 
 module.exports = router;

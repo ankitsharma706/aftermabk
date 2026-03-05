@@ -1,44 +1,26 @@
-{
-  "_id": "INS-SBI-001",
-  "scheme_name": "Health Secure",
-  "bank_name": "SBI",
-  "description": "Covers maternity and surgery with comprehensive postpartum care support.",
-  "eligibility": {
-    "required_age": 18,
-    "max_age": 65,
-    "target_group": "Women / Mothers"
-  },
-  "coverage": {
-    "coverage_min": 50000,
-    "coverage_max": 500000,
-    "coverage_areas": [
-      "Maternity",
-      "Surgery",
-      "Postpartum Care",
-      "Hospitalization"
-    ]
-  },
-  "metrics": {
-    "approval_rate": 92,
-    "processing_days": 7,
-    "clients_served": 5000
-  },
-  "status": {
+[
+  {
+    "scheme_name": "Health Secure",
+    "bank_name": "SBI",
+    "description": "Covers maternity and surgery with comprehensive postpartum care support.",
+    "eligibility": "Women aged 18-65. Target group: Women / Mothers.",
+    "coverage": "Coverage ₹50,000 – ₹5,00,000. Areas: Maternity, Surgery, Postpartum Care, Hospitalization.",
     "active": true
   },
-  "analytics": {
-    "risk_level": "Low",
-    "recommended_for": [
-      "Pregnancy",
-      "Delivery",
-      "Postpartum Recovery"
-    ]
+  {
+    "scheme_name": "Pradhan Mantri Matru Vandana Yojana",
+    "bank_name": "Government of India",
+    "description": "Cash incentive scheme for pregnant and lactating mothers.",
+    "eligibility": "Women aged 18+ pregnant with first child. Registered resident of India.",
+    "coverage": "₹5,000 cash benefit in 3 installments for maternal and child care.",
+    "active": true
   },
-  "__v": 0,
-  "createdAt": {
-    "$date": "2026-03-03T12:57:07.915Z"
-  },
-  "updatedAt": {
-    "$date": "2026-03-03T13:04:10.749Z"
+  {
+    "scheme_name": "Janani Suraksha Yojana",
+    "bank_name": "National Health Mission",
+    "description": "Cash assistance for institutional delivery to reduce maternal and infant mortality.",
+    "eligibility": "BPL pregnant women. Rural/urban areas as defined by NHM.",
+    "coverage": "Rural: ₹1,400. Urban: ₹1,000 per delivery.",
+    "active": true
   }
-}
+]

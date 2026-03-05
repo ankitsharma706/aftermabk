@@ -2,10 +2,11 @@
 
 const jwt = require('jsonwebtoken');
 const config = require('../config/config');
-const { User } = require('../models');
+const { User, Doctor } = require('../models');
 
 /**
  * Verify JWT token from Authorization header.
+ * Supports both User tokens (role: 'user'|'admin') and Doctor tokens (role: 'doctor').
  * Attaches req.user = { _id, email, role }
  */
 const protect = async (req, res, next) => {
@@ -43,7 +44,26 @@ const protect = async (req, res, next) => {
       });
     }
 
-    // Check user still exists
+    // ── Doctor token ─────────────────────────────────────────────────
+    if (decoded.role === 'doctor') {
+      const doctor = await Doctor.findById(decoded._id).select('_id email active');
+      if (!doctor) {
+        return res.status(401).json({
+          status: 'error',
+          message: 'The doctor belonging to this token no longer exists.',
+        });
+      }
+      if (!doctor.active) {
+        return res.status(401).json({
+          status: 'error',
+          message: 'Your doctor account has been deactivated. Please contact support.',
+        });
+      }
+      req.user = { _id: doctor._id, email: doctor.email, role: 'doctor' };
+      return next();
+    }
+
+    // ── User / Admin token ──────────────────────────────────────────
     const user = await User.findById(decoded._id).select('_id email role is_active');
 
     if (!user) {
@@ -60,7 +80,6 @@ const protect = async (req, res, next) => {
       });
     }
 
-    // Attach to request
     req.user = {
       _id: user._id,
       email: user.email,

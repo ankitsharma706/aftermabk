@@ -1,420 +1,248 @@
 'use strict';
-
+const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const { User, Doctor } = require('../models');
 const config = require('../config/config');
-const { generateToken, generateRefreshToken, verifyRefreshToken, sanitizeUser } = require('../utils/helpers');
-const { createError } = require('../middleware/error.middleware');
 
-// Twilio Setup
-let twilioClient;
-if (config.twilio.accountSid && config.twilio.authToken) {
-    twilioClient = require('twilio')(config.twilio.accountSid, config.twilio.authToken);
-}
+const signToken = (id) =>
+    jwt.sign({ _id: id }, config.jwt.secret, { expiresIn: config.jwt.expiresIn || '7d' });
 
-// ─────────────────────────────────────────────────────────────
-// REGISTER
-// ─────────────────────────────────────────────────────────────
-const register = async (req, res, next) => {
+// POST /api/auth/register
+exports.register = async (req, res, next) => {
     try {
-        const { email, password, full_name, maternity_stage, delivery_method, dob, phone, role } = req.body;
-        const isDoctor = role === 'doctor';
+        const { full_name, email, password, phone } = req.body;
 
-        // Check duplicate email
+        if (!full_name || !email || !password)
+            return res.status(400).json({ status: 'error', message: 'full_name, email and password are required.' });
+
         const existing = await User.findOne({ email: email.toLowerCase() });
-        if (existing) {
-            return next(createError('An account with this email already exists.', 409));
-        }
+        if (existing)
+            return res.status(409).json({ status: 'error', message: 'Email already registered.' });
 
-        // Hash password
-        const password_hash = await bcrypt.hash(password, config.security.bcryptRounds);
+        const password_hash = await bcrypt.hash(password, 12);
 
-        const user = await User.create({
-            email: email.toLowerCase(),
-            password_hash,
-            full_name,
-            phone,
-            maternity_stage: maternity_stage || 'Postpartum',
-            delivery_method: delivery_method || 'Unknown',
-            dob,
-            auth_provider: 'local',
-            role: isDoctor ? 'doctor' : 'user',
-        });
+        // Mock data from user.json for new signups
+        const mockData = {
+            dob: '1997-01-15',
+            blood_group: 'A+',
+            phase: 'postpartum',
+            delivery_type: 'c-section',
+            aadhar_number: '123456789012',
+            address: 'ITER, SOA University',
+            city: 'Bhubaneswar',
+            state: 'Odisha',
+            pincode: '751030',
+            country: 'India',
+            height_cm: 160,
+            weight_kg: 60,
+            bmi: 23.4,
+            haemoglobin: 10.5,
+            thyroid: 2.8,
+            vitamin_d3: 18,
+            glucose: 92,
+            ferritin: 11,
+            serum_ferritin: 12,
+            symptoms: ['fatigue', 'back_pain', 'dizziness'],
+            family: {
+                contact_name: 'Rohit Sharma',
+                contact_phone: '+91-9123456789',
+                relation: 'Husband'
+            },
+            preferences: {
+                language: 'Hindi',
+                reminder_time: '08:00'
+            }
+        };
 
-        // If signing up as a doctor, create a Doctor profile record in the Doctor collection
-        if (isDoctor) {
-            await Doctor.create({
-                name: full_name,
-                email: email.toLowerCase(),
-                phone: phone || '',
-                specialization: 'General', // doctor updates this later from their profile settings
-            });
-        }
+        const user = await User.create({ full_name, email, phone, password_hash, ...mockData });
 
-        const token = generateToken({ _id: user._id, email: user.email, role: user.role });
-        const refreshToken = generateRefreshToken({ _id: user._id });
+        const token = signToken(user._id);
+        const safeUser = user.toObject();
+        delete safeUser.password_hash;
 
         return res.status(201).json({
             status: 'success',
-            message: isDoctor ? 'Doctor account created successfully.' : 'Account created successfully.',
-            data: {
-                user: sanitizeUser(user),
-                token,
-                refreshToken,
-            },
+            data: { token, user: safeUser },
         });
-    } catch (error) {
-        next(error);
-    }
+    } catch (err) { next(err); }
 };
 
-// ─────────────────────────────────────────────────────────────
-// LOGIN
-// ─────────────────────────────────────────────────────────────
-const login = async (req, res, next) => {
+// POST /api/auth/login
+exports.login = async (req, res, next) => {
     try {
         const { email, password } = req.body;
 
-        const user = await User.findOne({ email: email.toLowerCase() }).select('+password_hash');
+        if (!email || !password)
+            return res.status(400).json({ status: 'error', message: 'Email and password are required.' });
 
-        if (!user || !user.password_hash) {
-            return next(createError('Invalid email or password.', 401));
-        }
+        const user = await User.findOne({ email: email.toLowerCase() });
+        if (!user || !(await user.comparePassword(password)))
+            return res.status(401).json({ status: 'error', message: 'Invalid email or password.' });
 
-        const isMatch = await bcrypt.compare(password, user.password_hash);
-        if (!isMatch) {
-            return next(createError('Invalid email or password.', 401));
-        }
+        if (!user.is_active)
+            return res.status(401).json({ status: 'error', message: 'Account deactivated. Contact support.' });
 
-        if (!user.is_active) {
-            return next(createError('Your account has been deactivated.', 401));
-        }
-
-        // Update last login
-        user.last_login_at = new Date();
-        await user.save();
-
-        const token = generateToken({ _id: user._id, email: user.email, role: user.role });
-        const refreshToken = generateRefreshToken({ _id: user._id });
+        const token = signToken(user._id);
+        const safeUser = user.toObject();
+        delete safeUser.password_hash;
 
         return res.status(200).json({
             status: 'success',
-            message: 'Login successful.',
-            data: {
-                user: sanitizeUser(user),
-                token,
-                refreshToken,
-            },
+            data: { token, user: safeUser },
         });
-    } catch (error) {
-        next(error);
-    }
+    } catch (err) { next(err); }
 };
 
-// ─────────────────────────────────────────────────────────────
-// REFRESH TOKEN
-// ─────────────────────────────────────────────────────────────
-const refreshToken = async (req, res, next) => {
+// GET /api/auth/me
+exports.getMe = async (req, res, next) => {
     try {
-        const { refreshToken: token } = req.body;
-        if (!token) return next(createError('Refresh token required.', 400));
-
-        let decoded;
-        try {
-            decoded = verifyRefreshToken(token);
-        } catch {
-            return next(createError('Invalid or expired refresh token.', 401));
+        if (req.user.role === 'doctor') {
+            const doctor = await Doctor.findById(req.user._id).select('-password_hash');
+            if (!doctor) return res.status(404).json({ status: 'error', message: 'Doctor not found.' });
+            return res.status(200).json({ status: 'success', data: { doctor } });
         }
 
-        const user = await User.findById(decoded._id).select('_id email role is_active');
-
-        if (!user || !user.is_active) {
-            return next(createError('User not found or deactivated.', 401));
-        }
-
-        const newToken = generateToken({ _id: user._id, email: user.email, role: user.role });
-
-        return res.status(200).json({
-            status: 'success',
-            data: { token: newToken },
-        });
-    } catch (error) {
-        next(error);
-    }
+        const user = await User.findById(req.user._id).select('-password_hash');
+        if (!user) return res.status(404).json({ status: 'error', message: 'User not found.' });
+        return res.status(200).json({ status: 'success', data: { user } });
+    } catch (err) { next(err); }
 };
 
-// ─────────────────────────────────────────────────────────────
-// GOOGLE AUTH CALLBACK
-// ─────────────────────────────────────────────────────────────
-const googleCallback = async (req, res, next) => {
+// POST /api/auth/google
+// Accepts a Google ID token (credential), decodes it, and finds/creates the user.
+exports.loginWithGoogle = async (req, res, next) => {
     try {
-        const { googleId, email, name, picture } = req.googleUser;
+        const { credential } = req.body;
+        if (!credential) return res.status(400).json({ status: 'error', message: 'Google credential is required.' });
 
+        // Decode the Google JWT payload (it is NOT verified here — for production use google-auth-library)
+        const parts = credential.split('.');
+        if (parts.length !== 3) return res.status(400).json({ status: 'error', message: 'Invalid Google credential.' });
+
+        const payloadStr = Buffer.from(parts[1], 'base64url').toString('utf8');
+        const payload = JSON.parse(payloadStr);
+
+        const { email, name, sub: googleId } = payload;
+        if (!email) return res.status(400).json({ status: 'error', message: 'Google credential missing email.' });
+
+        // Find existing user or create one
         let user = await User.findOne({ email: email.toLowerCase() });
-
         if (!user) {
+            // New user via Google — create with a random password hash
+            const password_hash = await bcrypt.hash(googleId + Date.now(), 12);
+
+            // Mock data from user.json for new signups
+            const mockData = {
+                dob: '1997-01-15',
+                blood_group: 'A+',
+                phase: 'postpartum',
+                delivery_type: 'c-section',
+                aadhar_number: '123456789012',
+                address: 'ITER, SOA University',
+                city: 'Bhubaneswar',
+                state: 'Odisha',
+                pincode: '751030',
+                country: 'India',
+                height_cm: 160,
+                weight_kg: 60,
+                bmi: 23.4,
+                haemoglobin: 10.5,
+                thyroid: 2.8,
+                vitamin_d3: 18,
+                glucose: 92,
+                ferritin: 11,
+                serum_ferritin: 12,
+                symptoms: ['fatigue', 'back_pain', 'dizziness'],
+                family: {
+                    contact_name: 'Rohit Sharma',
+                    contact_phone: '+91-9123456789',
+                    relation: 'Husband'
+                },
+                preferences: {
+                    language: 'Hindi',
+                    reminder_time: '08:00'
+                }
+            };
+
             user = await User.create({
+                full_name: name || email.split('@')[0],
                 email: email.toLowerCase(),
-                full_name: name,
-                profile_picture_url: picture,
-                auth_provider: 'google',
-                provider_id: googleId,
-                is_verified: true,
+                password_hash,
+                role: 'user',
+                ...mockData
             });
-        } else {
-            user.auth_provider = 'google';
-            user.provider_id = googleId;
-            user.profile_picture_url = user.profile_picture_url || picture;
-            user.is_verified = true;
-            user.last_login_at = new Date();
-            await user.save();
         }
 
-        const token = generateToken({ _id: user._id, email: user.email, role: user.role });
-        const refresh = generateRefreshToken({ _id: user._id });
+        if (!user.is_active) return res.status(401).json({ status: 'error', message: 'Account deactivated.' });
+
+        const token = signToken(user._id);
+        const safeUser = user.toObject();
+        delete safeUser.password_hash;
 
         return res.status(200).json({
             status: 'success',
-            message: 'Google authentication successful.',
-            data: {
-                user: sanitizeUser(user),
-                token,
-                refreshToken: refresh,
-            },
+            data: { token, user: safeUser },
         });
-    } catch (error) {
-        next(error);
-    }
+    } catch (err) { next(err); }
 };
 
-// ─────────────────────────────────────────────────────────────
-// VERIFY GOOGLE ID TOKEN
-// ─────────────────────────────────────────────────────────────
-const verifyGoogleToken = async (req, res, next) => {
+
+// ──────────────────────────────────────────────────────────────────────────────
+//  DOCTOR AUTH
+// ──────────────────────────────────────────────────────────────────────────────
+
+const signDoctorToken = (id) =>
+    jwt.sign({ _id: id, role: 'doctor' }, config.jwt.secret, { expiresIn: config.jwt.expiresIn || '7d' });
+
+// POST /api/auth/doctor/register
+exports.doctorRegister = async (req, res, next) => {
     try {
-        const { id_token } = req.body;
-        if (!id_token) return next(createError('Google id_token required.', 400));
+        const { name, email, password, specialization, phone, registration_number } = req.body;
 
-        const parts = id_token.split('.');
-        if (parts.length !== 3) return next(createError('Invalid Google token.', 400));
+        if (!name || !email || !password || !specialization)
+            return res.status(400).json({ status: 'error', message: 'name, email, password and specialization are required.' });
 
-        const payload = JSON.parse(Buffer.from(parts[1], 'base64').toString('utf-8'));
+        const existing = await Doctor.findOne({ email: email.toLowerCase() });
+        if (existing)
+            return res.status(409).json({ status: 'error', message: 'A doctor with this email already exists.' });
 
-        req.googleUser = {
-            googleId: payload.sub,
-            email: payload.email,
-            name: payload.name,
-            picture: payload.picture,
-        };
+        const password_hash = await bcrypt.hash(password, 12);
+        const doctor = await Doctor.create({ name, email, specialization, phone, registration_number, password_hash });
 
-        return googleCallback(req, res, next);
-    } catch (error) {
-        next(createError('Failed to verify Google token.', 401));
-    }
+        const token = signDoctorToken(doctor._id);
+        const safeDoctor = doctor.toObject();
+        delete safeDoctor.password_hash;
+
+        return res.status(201).json({
+            status: 'success',
+            data: { token, doctor: safeDoctor },
+        });
+    } catch (err) { next(err); }
 };
 
-// ─────────────────────────────────────────────────────────────
-// APPLE AUTH
-// ─────────────────────────────────────────────────────────────
-const appleCallback = async (req, res, next) => {
+// POST /api/auth/doctor/login
+exports.doctorLogin = async (req, res, next) => {
     try {
-        const { identity_token, user: appleUserData } = req.body;
-        if (!identity_token) return next(createError('Apple identity_token required.', 400));
+        const { email, password } = req.body;
 
-        const parts = identity_token.split('.');
-        if (parts.length !== 3) return next(createError('Invalid Apple token.', 400));
+        if (!email || !password)
+            return res.status(400).json({ status: 'error', message: 'Email and password are required.' });
 
-        const payload = JSON.parse(Buffer.from(parts[1], 'base64').toString('utf-8'));
+        // Explicitly select password_hash (it is hidden by default via select:false)
+        const doctor = await Doctor.findOne({ email: email.toLowerCase() }).select('+password_hash');
+        if (!doctor || !(await doctor.comparePassword(password)))
+            return res.status(401).json({ status: 'error', message: 'Invalid email or password.' });
 
-        const appleId = payload.sub;
-        const email = payload.email || appleUserData?.email;
-        const name = appleUserData?.name
-            ? `${appleUserData.name.firstName || ''} ${appleUserData.name.lastName || ''}`.trim()
-            : email?.split('@')[0];
+        if (!doctor.active)
+            return res.status(401).json({ status: 'error', message: 'Account deactivated. Contact support.' });
 
-        if (!email) return next(createError('Email not provided by Apple.', 400));
-
-        let user = await User.findOne({ email: email.toLowerCase() });
-
-        if (!user) {
-            user = await User.create({
-                email: email.toLowerCase(),
-                full_name: name || 'Apple User',
-                auth_provider: 'apple',
-                provider_id: appleId,
-                is_verified: true,
-            });
-        } else {
-            user.auth_provider = 'apple';
-            user.provider_id = appleId;
-            user.is_verified = true;
-            user.last_login_at = new Date();
-            await user.save();
-        }
-
-        const token = generateToken({ _id: user._id, email: user.email, role: user.role });
-        const refresh = generateRefreshToken({ _id: user._id });
+        const token = signDoctorToken(doctor._id);
+        const safeDoctor = doctor.toObject();
+        delete safeDoctor.password_hash;
 
         return res.status(200).json({
             status: 'success',
-            message: 'Apple authentication successful.',
-            data: {
-                user: sanitizeUser(user),
-                token,
-                refreshToken: refresh,
-            },
+            data: { token, doctor: safeDoctor },
         });
-    } catch (error) {
-        next(error);
-    }
-};
-
-// ─────────────────────────────────────────────────────────────
-// TWILIO SEND OTP
-// ─────────────────────────────────────────────────────────────
-const sendOtp = async (req, res, next) => {
-    try {
-        if (!twilioClient) {
-            return next(createError('Twilio is not configured on the server.', 500));
-        }
-
-        const { phone } = req.body;
-
-        const verification = await twilioClient.verify.v2
-            .services(config.twilio.verifyServiceSid)
-            .verifications
-            .create({ to: phone, channel: 'sms' });
-
-        return res.status(200).json({
-            status: 'success',
-            message: `OTP sent successfully. Status: ${verification.status}`,
-        });
-    } catch (error) {
-        next(createError(error.message || 'Failed to send OTP. Please check the phone number.', 400));
-    }
-};
-
-// ─────────────────────────────────────────────────────────────
-// TWILIO VERIFY OTP (Sign In / Sign Up)
-// ─────────────────────────────────────────────────────────────
-const verifyOtp = async (req, res, next) => {
-    try {
-        if (!twilioClient) {
-            return next(createError('Twilio is not configured on the server.', 500));
-        }
-
-        const { phone, code, role } = req.body;
-        const isDoctor = role === 'doctor';
-
-        const verification_check = await twilioClient.verify.v2
-            .services(config.twilio.verifyServiceSid)
-            .verificationChecks
-            .create({ to: phone, code: code });
-
-        if (verification_check.status !== 'approved') {
-            return next(createError('Invalid or expired OTP.', 401));
-        }
-
-        // OTP Approved. Login or Register the user.
-        let user = await User.findOne({ phone: phone });
-
-        if (!user) {
-            // Register new user via OTP
-            user = await User.create({
-                phone: phone,
-                auth_provider: 'twilio',
-                is_verified: true,
-                full_name: isDoctor ? 'Dr. User' : 'Twilio User',
-                role: isDoctor ? 'doctor' : 'user',
-            });
-
-            // If signing up as a doctor via phone, create a Doctor profile record
-            if (isDoctor) {
-                await Doctor.create({
-                    name: user.full_name,
-                    phone: phone,
-                    specialization: 'General',
-                });
-            }
-        } else {
-            // Login existing user
-            user.is_verified = true;
-            user.last_login_at = new Date();
-            await user.save();
-        }
-
-        const token = generateToken({ _id: user._id, phone: user.phone, role: user.role });
-        const refreshToken = generateRefreshToken({ _id: user._id });
-
-        return res.status(200).json({
-            status: 'success',
-            message: 'Phone verification successful.',
-            data: {
-                user: sanitizeUser(user),
-                token,
-                refreshToken,
-            },
-        });
-    } catch (error) {
-        next(createError(error.message || 'Failed to verify OTP.', 400));
-    }
-};
-
-// ─────────────────────────────────────────────────────────────
-// GET ME
-// ─────────────────────────────────────────────────────────────
-const getMe = async (req, res, next) => {
-    try {
-        const user = await User.findById(req.user._id);
-        if (!user) return next(createError('User not found.', 404));
-
-        return res.status(200).json({
-            status: 'success',
-            data: { user: sanitizeUser(user) },
-        });
-    } catch (error) {
-        next(error);
-    }
-};
-
-// ─────────────────────────────────────────────────────────────
-// CHANGE PASSWORD
-// ─────────────────────────────────────────────────────────────
-const changePassword = async (req, res, next) => {
-    try {
-        const { current_password, new_password } = req.body;
-
-        const user = await User.findById(req.user._id).select('+password_hash');
-        if (!user) return next(createError('User not found.', 404));
-
-        if (user.auth_provider !== 'local') {
-            return next(createError('Password change is not available for OAuth accounts.', 400));
-        }
-
-        const isMatch = await bcrypt.compare(current_password, user.password_hash);
-        if (!isMatch) return next(createError('Current password is incorrect.', 400));
-
-        user.password_hash = await bcrypt.hash(new_password, config.security.bcryptRounds);
-        await user.save();
-
-        return res.status(200).json({
-            status: 'success',
-            message: 'Password changed successfully.',
-        });
-    } catch (error) {
-        next(error);
-    }
-};
-
-module.exports = {
-    register,
-    login,
-    refreshToken,
-    googleCallback,
-    verifyGoogleToken,
-    appleCallback,
-    sendOtp,
-    verifyOtp,
-    getMe,
-    changePassword,
+    } catch (err) { next(err); }
 };

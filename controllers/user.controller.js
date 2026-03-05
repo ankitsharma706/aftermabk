@@ -1,278 +1,129 @@
 'use strict';
+const { User } = require('../models');
 
-const { User, CalendarEvent } = require('../models');
-const { predictCycleCalendar } = require('../services/healthScoring.service');
-const { sanitizeUser, parsePagination, paginateMeta } = require('../utils/helpers');
-const { createError } = require('../middleware/error.middleware');
+// ─── Helpers ──────────────────────────────────────────────────────────────────
+const ALLOWED_UPDATE = [
+    'full_name', 'email', 'phone', 'dob', 'blood_group', 'phase', 'delivery_type',
+    'aadhar_number', 'address', 'city', 'state', 'pincode', 'country',
+    'height_cm', 'weight_kg', 'bmi',
+    'haemoglobin', 'thyroid', 'vitamin_d3', 'glucose', 'ferritin', 'serum_ferritin',
+    'symptoms', 'family', 'preferences', 'profile_picture_url',
+    'caregiver_permissions', 'notifications'
+];
+const ENUM_FIELDS = ['blood_group', 'phase', 'delivery_type'];
 
-// ─────────────────────────────────────────────────────────────
-// GET ALL USERS  (admin only)
-// ─────────────────────────────────────────────────────────────
-const getAllUsers = async (req, res, next) => {
-    try {
-        const { page, limit, skip } = parsePagination(req.query); // Mongoose uses skip instead of offset
-        // Helper outputs { page, limit, offset } so we map offset -> skip
-        const offset = parsePagination(req.query).offset;
-        const { maternity_stage, search } = req.query;
-
-        const query = {};
-        if (maternity_stage) query.maternity_stage = maternity_stage;
-        if (search) {
-            query.$or = [
-                { full_name: { $regex: search, $options: 'i' } },
-                { email: { $regex: search, $options: 'i' } },
-            ];
-        }
-
-        const count = await User.countDocuments(query);
-        const users = await User.find(query)
-            .sort({ createdAt: -1 })
-            .skip(offset)
-            .limit(limit);
-
-        return res.status(200).json({
-            status: 'success',
-            data: {
-                users: users.map(u => sanitizeUser(u)),
-                meta: paginateMeta(count, page, limit),
-            },
-        });
-    } catch (error) {
-        next(error);
+const buildUpdate = (body) => {
+    const update = {};
+    for (const key of ALLOWED_UPDATE) {
+        if (body[key] !== undefined) update[key] = body[key];
     }
+    // Drop empty-string enum values to avoid validation errors
+    for (const f of ENUM_FIELDS) {
+        if (update[f] === '') delete update[f];
+    }
+    return update;
 };
 
-// ─────────────────────────────────────────────────────────────
-// GET ONE USER
-// ─────────────────────────────────────────────────────────────
-const getUserById = async (req, res, next) => {
+// ─── GET /api/users/me ────────────────────────────────────────────────────────
+exports.getMe = async (req, res, next) => {
     try {
-        const user = await User.findById(req.params.userId);
-        if (!user) return next(createError('User not found.', 404));
-
-        return res.status(200).json({ status: 'success', data: { user: sanitizeUser(user) } });
-    } catch (error) {
-        next(error);
-    }
+        const user = await User.findById(req.user._id).select('-password_hash');
+        if (!user) return res.status(404).json({ status: 'error', message: 'User not found.' });
+        return res.status(200).json({ status: 'success', data: { user } });
+    } catch (err) { next(err); }
 };
 
-// ─────────────────────────────────────────────────────────────
-// CREATE USER (ADMIN)
-// ─────────────────────────────────────────────────────────────
-const createUser = async (req, res, next) => {
+// ─── PATCH /api/users/me ──────────────────────────────────────────────────────
+exports.updateMe = async (req, res, next) => {
     try {
-        const { email, password, full_name, phone, role } = req.body;
+        const FORBIDDEN = ['password_hash', 'password', 'role', 'is_active', '_id', '__v'];
+        FORBIDDEN.forEach(f => delete req.body[f]);
 
-        // This is a basic creation without all auth checks, meant for admin use
-        const existingUser = await User.findOne({ email });
-        if (existingUser) {
-            return next(createError('Email already in use.', 400));
-        }
-
-        const newUser = new User({
-            email,
-            full_name,
-            phone,
-            role: role || 'user',
-            // In a real scenario, you'd hash the password here if provided
-            // For example: password_hash: await hashPassword(password)
-        });
-
-        await newUser.save();
-
-        return res.status(201).json({
-            status: 'success',
-            message: 'User created successfully.',
-            data: { user: sanitizeUser(newUser) },
-        });
-    } catch (error) {
-        next(error);
-    }
-};
-
-// ─────────────────────────────────────────────────────────────
-// UPDATE USER PROFILE
-// ─────────────────────────────────────────────────────────────
-const updateUser = async (req, res, next) => {
-    try {
-        let updateData = { ...req.body };
-
-        // Strip protected fields for non-admins
-        if (!req.user || req.user.role !== 'admin') {
-            const {
-                password_hash, role, provider_id, auth_provider,
-                is_active, is_verified, last_login_at, _id,
-                ...allowedUpdates
-            } = req.body;
-            updateData = allowedUpdates;
-        } else {
-            // Even admins shouldn't overwrite _id directly
-            delete updateData._id;
-        }
+        const update = buildUpdate(req.body);
+        if (Object.keys(update).length === 0)
+            return res.status(400).json({ status: 'error', message: 'No valid fields to update.' });
 
         const user = await User.findByIdAndUpdate(
-            req.params.userId,
-            { $set: updateData },
-            { returnDocument: 'after', runValidators: true }
-        );
+            req.user._id,
+            { $set: update },
+            { returnDocument: 'after', runValidators: false }
+        ).select('-password_hash');
 
-        if (!user) return next(createError('User not found.', 404));
+        if (!user) return res.status(404).json({ status: 'error', message: 'User not found.' });
+        return res.status(200).json({ status: 'success', data: { user } });
+    } catch (err) { next(err); }
+};
+
+// ─── DELETE /api/users/me ─────────────────────────────────────────────────────
+exports.deleteMe = async (req, res, next) => {
+    try {
+        await User.findByIdAndUpdate(req.user._id, { is_active: false });
+        return res.status(200).json({ status: 'success', message: 'Account deactivated successfully.' });
+    } catch (err) { next(err); }
+};
+
+// ─── GET /api/users ───────────────────────── (admin only) ────────────────────
+exports.getAllUsers = async (req, res, next) => {
+    try {
+        const { role, phase, active, page = 1, limit = 20 } = req.query;
+        const filter = {};
+        if (role) filter.role = role;
+        if (phase) filter.phase = phase;
+        if (active !== undefined) filter.is_active = active === 'true';
+
+        const skip = (Number(page) - 1) * Number(limit);
+        const [users, total] = await Promise.all([
+            User.find(filter).select('-password_hash').sort({ createdAt: -1 }).skip(skip).limit(Number(limit)),
+            User.countDocuments(filter),
+        ]);
 
         return res.status(200).json({
             status: 'success',
-            message: 'Profile updated successfully.',
-            data: { user: sanitizeUser(user) },
+            results: users.length,
+            total,
+            page: Number(page),
+            pages: Math.ceil(total / Number(limit)),
+            data: { users },
         });
-    } catch (error) {
-        next(error);
-    }
+    } catch (err) { next(err); }
 };
 
-// ─────────────────────────────────────────────────────────────
-// DELETE USER  (admin only or self-delete)
-// ─────────────────────────────────────────────────────────────
-const deleteUser = async (req, res, next) => {
+// ─── GET /api/users/:id ───────────────────── (admin only) ────────────────────
+exports.getUser = async (req, res, next) => {
     try {
-        const user = await User.findByIdAndDelete(req.params.userId);
-        if (!user) return next(createError('User not found.', 404));
-
-        return res.status(200).json({
-            status: 'success',
-            message: 'User account deleted successfully.',
-        });
-    } catch (error) {
-        next(error);
-    }
+        const user = await User.findById(req.params.id).select('-password_hash');
+        if (!user) return res.status(404).json({ status: 'error', message: 'User not found.' });
+        return res.status(200).json({ status: 'success', data: { user } });
+    } catch (err) { next(err); }
 };
 
-// ─────────────────────────────────────────────────────────────
-// CHANGE USER ROLE (ADMIN ONLY)
-// ─────────────────────────────────────────────────────────────
-const changeUserRole = async (req, res, next) => {
+// ─── PATCH /api/users/:id ─────────────────── (admin only) ────────────────────
+exports.updateUser = async (req, res, next) => {
     try {
-        const { role } = req.body;
+        const update = buildUpdate(req.body);
+        // Admins may also set role and is_active
+        if (req.body.role !== undefined) update.role = req.body.role;
+        if (req.body.is_active !== undefined) update.is_active = req.body.is_active;
 
-        if (!role || !['user', 'admin', 'doctor'].includes(role)) {
-            return next(createError('A valid role is required (user, admin, doctor).', 400));
-        }
+        if (Object.keys(update).length === 0)
+            return res.status(400).json({ status: 'error', message: 'No valid fields to update.' });
 
         const user = await User.findByIdAndUpdate(
-            req.params.userId,
-            { $set: { role } },
-            { returnDocument: 'after', runValidators: true }
-        );
+            req.params.id,
+            { $set: update },
+            { returnDocument: 'after', runValidators: false }
+        ).select('-password_hash');
 
-        if (!user) return next(createError('User not found.', 404));
-
-        return res.status(200).json({
-            status: 'success',
-            message: `User role successfully updated to ${role}.`,
-            data: { user: sanitizeUser(user) },
-        });
-    } catch (error) {
-        next(error);
-    }
+        if (!user) return res.status(404).json({ status: 'error', message: 'User not found.' });
+        return res.status(200).json({ status: 'success', data: { user } });
+    } catch (err) { next(err); }
 };
 
-// ─────────────────────────────────────────────────────────────
-// GET MY CYCLE CALENDAR
-// ─────────────────────────────────────────────────────────────
-const getMyCycleCalendar = async (req, res, next) => {
+// ─── DELETE /api/users/:id ────────────────── (admin only) ────────────────────
+exports.deleteUser = async (req, res, next) => {
     try {
-        const user = await User.findById(req.user._id);
-        if (!user) return next(createError('User not found.', 404));
-
-        const monthsAhead = parseInt(req.query.months, 10) || 3;
-
-        // Get existing confirmed events
-        const existingEvents = await CalendarEvent.find({ user_id: user._id })
-            .sort({ event_date: 1 });
-
-        // Predict future cycle events
-        const predicted = predictCycleCalendar(
-            user.last_period_date,
-            user.cycle_length_days,
-            user.period_duration_days,
-            monthsAhead
-        );
-
-        return res.status(200).json({
-            status: 'success',
-            data: {
-                confirmed_events: existingEvents,
-                predicted_events: predicted,
-                cycle_info: {
-                    last_period_date: user.last_period_date,
-                    cycle_length_days: user.cycle_length_days,
-                    period_duration_days: user.period_duration_days,
-                    flow_intensity: user.flow_intensity,
-                },
-            },
-        });
-    } catch (error) {
-        next(error);
-    }
-};
-
-// ─────────────────────────────────────────────────────────────
-// LOG CALENDAR EVENT
-// ─────────────────────────────────────────────────────────────
-const logCalendarEvent = async (req, res, next) => {
-    try {
-        const { event_date, event_type, flow_intensity, cramps_severity, symptoms, title, description } = req.body;
-
-        const event = await CalendarEvent.create({
-            user_id: req.user._id,
-            event_date,
-            event_type,
-            flow_intensity,
-            cramps_severity,
-            symptoms: symptoms || [],
-            title,
-            description,
-            is_confirmed: true,
-        });
-
-        if (event_type === 'period_start') {
-            await User.findByIdAndUpdate(req.user._id, { last_period_date: event_date });
-        }
-
-        return res.status(201).json({
-            status: 'success',
-            message: 'Calendar event logged.',
-            data: { event },
-        });
-    } catch (error) {
-        next(error);
-    }
-};
-
-// ─────────────────────────────────────────────────────────────
-// DELETE CALENDAR EVENT
-// ─────────────────────────────────────────────────────────────
-const deleteCalendarEvent = async (req, res, next) => {
-    try {
-        const event = await CalendarEvent.findOneAndDelete({
-            _id: req.params.eventId,
-            user_id: req.user._id,
-        });
-
-        if (!event) return next(createError('Calendar event not found.', 404));
-
-        return res.status(200).json({ status: 'success', message: 'Event deleted.' });
-    } catch (error) {
-        next(error);
-    }
-};
-
-module.exports = {
-    getAllUsers,
-    getUserById,
-    createUser,
-    updateUser,
-    deleteUser,
-    changeUserRole,
-    getMyCycleCalendar,
-    logCalendarEvent,
-    deleteCalendarEvent,
+        const user = await User.findByIdAndDelete(req.params.id);
+        if (!user) return res.status(404).json({ status: 'error', message: 'User not found.' });
+        return res.status(200).json({ status: 'success', message: 'User permanently deleted.' });
+    } catch (err) { next(err); }
 };

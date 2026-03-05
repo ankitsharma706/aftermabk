@@ -43,7 +43,11 @@ const config = {
   },
 
   cors: {
-    origin: 'http://localhost:3000' || process.env.FRONTEND_URL || 'https://afterma.netlify.app',
+    origin: [
+      'http://localhost:3000',
+      'http://localhost:5173',
+      process.env.FRONTEND_URL || 'https://afterma.netlify.app',
+    ],
     credentials: true,
   },
 };
