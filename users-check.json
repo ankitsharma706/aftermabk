@@ -1,0 +1,84 @@
+[
+  {
+    "contact": {
+      "email": "[EMAIL_ADDRESS]",
+      "phone": "+91-9876543210"
+    },
+    "family": {
+      "primary_contact_name": "Rohit Sharma",
+      "primary_contact_number": "+91-9123456789",
+      "family_member_name": "Neha Sharma",
+      "relationship": "Husband"
+    },
+    "preferences": {
+      "preferred_language": "Hindi",
+      "preferred_reminder_time": "08:00",
+      "data_visibility": [
+        "Family",
+        "Doctor"
+      ]
+    },
+    "appointments": {
+      "last_visit": "2026-02-01T00:00:00.000Z",
+      "next_appointment": "2026-03-01T00:00:00.000Z",
+      "mode": "In-person"
+    },
+    "resource_library": {
+      "recommended_today": [
+        {
+          "title": "Gentle Breathing for Recovery",
+          "category": "Guided Video",
+          "duration_minutes": 5,
+          "_id": "69a8b60b076c772d76a2c1ce"
+        }
+      ]
+    },
+    "_id": "69a8b60b076c772d76a2c1cd",
+    "email": "aditi.sharma@example.com",
+    "phone": "+91-9876543210",
+    "auth_provider": "local",
+    "person_id": 1,
+    "full_name": "Aditi Sharma",
+    "Dob": "1997-01-01T00:00:00.000Z",
+    "blood_group": "A+",
+    "cycle_length_days": 28,
+    "delivery_type": "C-section",
+    "phase": "postpartum",
+    "profile_picture_url": "/images/aditi.jpg",
+    "summary_id": "summary-uuid",
+    "period_id": "period-uuid",
+    "log_id": "log-uuid",
+    "session_id": "session-uuid",
+    "booking_id": "booking-uuid",
+    "insurance_id": "insurance-uuid",
+    "care_circle_id": "care-circle-uuid",
+    "doctor_id": "doc-uuid",
+    "address": "iter soa university ",
+    "city": "bbsr",
+    "pincode": "751030",
+    "state": "odisha",
+    "country": "india",
+    "weight_kg": 60,
+    "height_cm": 160,
+    "bmi": 23.4,
+    "haemoglobin_level": 12,
+    "thyroid_level": 12,
+    "vitamin_d3_level": 12,
+    "glucose_level": 12,
+    "ferritin_level": 12,
+    "serum_ferritin_level": 12,
+    "symboms": [
+      "fatigue",
+      "back_pain",
+      "dizziness"
+    ],
+    "privacy_mode": true,
+    "subscription": true,
+    "is_active": true,
+    "is_verified": false,
+    "role": "user",
+    "createdAt": "2026-03-04T22:45:31.345Z",
+    "updatedAt": "2026-03-04T22:45:31.345Z",
+    "__v": 0
+  }
+]

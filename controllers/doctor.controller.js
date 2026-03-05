@@ -58,7 +58,7 @@ const updateDoctor = async (req, res, next) => {
         const doctor = await Doctor.findByIdAndUpdate(
             req.params.doctorId,
             { $set: req.body },
-            { new: true, runValidators: true }
+            { returnDocument: 'after', runValidators: true }
         );
         if (!doctor) return next(createError('Doctor not found.', 404));
         return res.status(200).json({ status: 'success', data: { doctor } });

@@ -1,0 +1,894 @@
+{
+  "current_medications": [
+    {
+      "medication_id": "MED-uuid",
+      "category": "Iron + Folic Acid",
+      "name": "Ferrous Sulphate",
+      "dose": "200 mg",
+      "frequency": "1 tablet once daily",
+      "instructions": "After food",
+      "duration": "8 weeks",
+      "purpose": "Iron deficiency treatment"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Vitamin D3 Supplement",
+      "name": "Cholecalciferol",
+      "dose": "60000 IU",
+      "frequency": "1 sachet weekly",
+      "instructions": "Oral intake",
+      "duration": "8 weeks",
+      "purpose": "Vitamin D deficiency correction"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Vitamin C",
+      "name": "Ascorbic Acid",
+      "dose": "500 mg",
+      "frequency": "1 tablet once daily",
+      "instructions": "With iron supplement",
+      "duration": "8 weeks",
+      "purpose": "Enhances iron absorption"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Calcium Supplement",
+      "name": "Calcium Carbonate",
+      "dose": "500 mg",
+      "frequency": "1 tablet twice daily",
+      "instructions": "After meals",
+      "duration": "12 weeks",
+      "purpose": "Bone strength support"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Multivitamin",
+      "name": "Multivitamin Complex",
+      "dose": "1 tablet",
+      "frequency": "once daily",
+      "instructions": "After breakfast",
+      "duration": "12 weeks",
+      "purpose": "General nutritional support"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Pain Relief",
+      "name": "Paracetamol",
+      "dose": "500 mg",
+      "frequency": "when required",
+      "instructions": "After food",
+      "duration": "5 days",
+      "purpose": "Pain relief"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Antibiotic",
+      "name": "Amoxicillin",
+      "dose": "500 mg",
+      "frequency": "three times daily",
+      "instructions": "After meals",
+      "duration": "7 days",
+      "purpose": "Bacterial infection treatment"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Antibiotic",
+      "name": "Azithromycin",
+      "dose": "500 mg",
+      "frequency": "once daily",
+      "instructions": "Before food",
+      "duration": "3 days",
+      "purpose": "Respiratory infection treatment"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Probiotic",
+      "name": "Lactobacillus Capsule",
+      "dose": "1 capsule",
+      "frequency": "once daily",
+      "instructions": "After meals",
+      "duration": "10 days",
+      "purpose": "Gut health improvement"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Antacid",
+      "name": "Pantoprazole",
+      "dose": "40 mg",
+      "frequency": "once daily",
+      "instructions": "Before breakfast",
+      "duration": "14 days",
+      "purpose": "Acidity treatment"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Thyroid Medication",
+      "name": "Levothyroxine",
+      "dose": "50 mcg",
+      "frequency": "once daily",
+      "instructions": "Morning empty stomach",
+      "duration": "Ongoing",
+      "purpose": "Thyroid hormone replacement"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Blood Pressure",
+      "name": "Amlodipine",
+      "dose": "5 mg",
+      "frequency": "once daily",
+      "instructions": "After breakfast",
+      "duration": "Ongoing",
+      "purpose": "Hypertension control"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Blood Sugar",
+      "name": "Metformin",
+      "dose": "500 mg",
+      "frequency": "twice daily",
+      "instructions": "After meals",
+      "duration": "Ongoing",
+      "purpose": "Blood sugar control"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Anti-inflammatory",
+      "name": "Ibuprofen",
+      "dose": "400 mg",
+      "frequency": "twice daily",
+      "instructions": "After food",
+      "duration": "5 days",
+      "purpose": "Inflammation relief"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Hormonal Therapy",
+      "name": "Progesterone",
+      "dose": "200 mg",
+      "frequency": "once daily",
+      "instructions": "Night time",
+      "duration": "14 days",
+      "purpose": "Hormonal balance"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Hormonal Therapy",
+      "name": "Estrogen Tablets",
+      "dose": "1 mg",
+      "frequency": "once daily",
+      "instructions": "After meals",
+      "duration": "21 days",
+      "purpose": "Hormone therapy"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Antidepressant",
+      "name": "Sertraline",
+      "dose": "50 mg",
+      "frequency": "once daily",
+      "instructions": "Morning",
+      "duration": "Ongoing",
+      "purpose": "Postpartum depression treatment"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Sleep Aid",
+      "name": "Melatonin",
+      "dose": "3 mg",
+      "frequency": "nightly",
+      "instructions": "Before sleep",
+      "duration": "30 days",
+      "purpose": "Sleep regulation"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Magnesium Supplement",
+      "name": "Magnesium Oxide",
+      "dose": "400 mg",
+      "frequency": "once daily",
+      "instructions": "After dinner",
+      "duration": "30 days",
+      "purpose": "Muscle relaxation"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Omega 3",
+      "name": "Fish Oil Capsule",
+      "dose": "1000 mg",
+      "frequency": "once daily",
+      "instructions": "After meals",
+      "duration": "12 weeks",
+      "purpose": "Heart health support"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Prenatal Vitamin",
+      "name": "Prenatal Multivitamin",
+      "dose": "1 tablet",
+      "frequency": "once daily",
+      "instructions": "After breakfast",
+      "duration": "Pregnancy period",
+      "purpose": "Pregnancy nutritional support"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Vitamin B12",
+      "name": "Cyanocobalamin",
+      "dose": "1000 mcg",
+      "frequency": "weekly",
+      "instructions": "Injection",
+      "duration": "8 weeks",
+      "purpose": "Vitamin B12 deficiency"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Anti-allergy",
+      "name": "Cetirizine",
+      "dose": "10 mg",
+      "frequency": "once daily",
+      "instructions": "Night",
+      "duration": "5 days",
+      "purpose": "Allergy relief"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Anti-nausea",
+      "name": "Ondansetron",
+      "dose": "4 mg",
+      "frequency": "twice daily",
+      "instructions": "Before meals",
+      "duration": "3 days",
+      "purpose": "Nausea treatment"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Digestive Enzyme",
+      "name": "Pancreatin",
+      "dose": "1 tablet",
+      "frequency": "twice daily",
+      "instructions": "After meals",
+      "duration": "10 days",
+      "purpose": "Digestive support"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Antifungal",
+      "name": "Fluconazole",
+      "dose": "150 mg",
+      "frequency": "single dose",
+      "instructions": "Oral",
+      "duration": "1 day",
+      "purpose": "Fungal infection treatment"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Antiviral",
+      "name": "Acyclovir",
+      "dose": "400 mg",
+      "frequency": "three times daily",
+      "instructions": "After food",
+      "duration": "5 days",
+      "purpose": "Viral infection treatment"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Pain Relief",
+      "name": "Diclofenac",
+      "dose": "50 mg",
+      "frequency": "twice daily",
+      "instructions": "After meals",
+      "duration": "5 days",
+      "purpose": "Pain relief"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Muscle Relaxant",
+      "name": "Cyclobenzaprine",
+      "dose": "10 mg",
+      "frequency": "once daily",
+      "instructions": "Night",
+      "duration": "7 days",
+      "purpose": "Muscle relaxation"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Anti-anxiety",
+      "name": "Clonazepam",
+      "dose": "0.5 mg",
+      "frequency": "once daily",
+      "instructions": "Night",
+      "duration": "7 days",
+      "purpose": "Anxiety reduction"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Vitamin A",
+      "name": "Retinol Capsule",
+      "dose": "5000 IU",
+      "frequency": "once daily",
+      "instructions": "After food",
+      "duration": "4 weeks",
+      "purpose": "Vision and immunity support"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Zinc Supplement",
+      "name": "Zinc Sulphate",
+      "dose": "50 mg",
+      "frequency": "once daily",
+      "instructions": "After meals",
+      "duration": "30 days",
+      "purpose": "Immune support"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Electrolyte",
+      "name": "ORS Solution",
+      "dose": "1 sachet",
+      "frequency": "when needed",
+      "instructions": "Mix in water",
+      "duration": "As required",
+      "purpose": "Hydration support"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Lactation Support",
+      "name": "Domperidone",
+      "dose": "10 mg",
+      "frequency": "three times daily",
+      "instructions": "Before meals",
+      "duration": "10 days",
+      "purpose": "Improve lactation"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Lactation Supplement",
+      "name": "Fenugreek Capsule",
+      "dose": "500 mg",
+      "frequency": "twice daily",
+      "instructions": "After meals",
+      "duration": "30 days",
+      "purpose": "Breast milk production"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Anti-inflammatory",
+      "name": "Naproxen",
+      "dose": "250 mg",
+      "frequency": "twice daily",
+      "instructions": "After meals",
+      "duration": "5 days",
+      "purpose": "Pain and inflammation"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Antacid",
+      "name": "Omeprazole",
+      "dose": "20 mg",
+      "frequency": "once daily",
+      "instructions": "Before breakfast",
+      "duration": "14 days",
+      "purpose": "Acidity relief"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Skin Care",
+      "name": "Topical Hydrocortisone",
+      "dose": "Apply thin layer",
+      "frequency": "twice daily",
+      "instructions": "External use",
+      "duration": "7 days",
+      "purpose": "Skin inflammation relief"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Antiseptic",
+      "name": "Povidone Iodine Ointment",
+      "dose": "Apply small amount",
+      "frequency": "twice daily",
+      "instructions": "External use",
+      "duration": "5 days",
+      "purpose": "Wound infection prevention"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Iron + Folic Acid",
+      "name": "Ferrous Sulphate",
+      "dose": "200 mg",
+      "frequency": "1 tablet once daily",
+      "instructions": "After food",
+      "duration": "8 weeks",
+      "purpose": "Iron deficiency treatment"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Vitamin D3 Supplement",
+      "name": "Cholecalciferol",
+      "dose": "60000 IU",
+      "frequency": "1 sachet weekly",
+      "instructions": "Oral intake",
+      "duration": "8 weeks",
+      "purpose": "Vitamin D deficiency correction"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Vitamin C",
+      "name": "Ascorbic Acid",
+      "dose": "500 mg",
+      "frequency": "1 tablet once daily",
+      "instructions": "With iron supplement",
+      "duration": "8 weeks",
+      "purpose": "Enhances iron absorption"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Calcium Supplement",
+      "name": "Calcium Carbonate",
+      "dose": "500 mg",
+      "frequency": "1 tablet twice daily",
+      "instructions": "After meals",
+      "duration": "12 weeks",
+      "purpose": "Bone strength support"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Multivitamin",
+      "name": "Multivitamin Complex",
+      "dose": "1 tablet",
+      "frequency": "once daily",
+      "instructions": "After breakfast",
+      "duration": "12 weeks",
+      "purpose": "General nutritional support"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Pain Relief",
+      "name": "Paracetamol",
+      "dose": "500 mg",
+      "frequency": "when required",
+      "instructions": "After food",
+      "duration": "5 days",
+      "purpose": "Pain relief"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Antibiotic",
+      "name": "Amoxicillin",
+      "dose": "500 mg",
+      "frequency": "three times daily",
+      "instructions": "After meals",
+      "duration": "7 days",
+      "purpose": "Bacterial infection treatment"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Antibiotic",
+      "name": "Azithromycin",
+      "dose": "500 mg",
+      "frequency": "once daily",
+      "instructions": "Before food",
+      "duration": "3 days",
+      "purpose": "Respiratory infection treatment"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Probiotic",
+      "name": "Lactobacillus Capsule",
+      "dose": "1 capsule",
+      "frequency": "once daily",
+      "instructions": "After meals",
+      "duration": "10 days",
+      "purpose": "Gut health improvement"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Antacid",
+      "name": "Pantoprazole",
+      "dose": "40 mg",
+      "frequency": "once daily",
+      "instructions": "Before breakfast",
+      "duration": "14 days",
+      "purpose": "Acidity treatment"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Thyroid Medication",
+      "name": "Levothyroxine",
+      "dose": "50 mcg",
+      "frequency": "once daily",
+      "instructions": "Morning empty stomach",
+      "duration": "Ongoing",
+      "purpose": "Thyroid hormone replacement"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Blood Pressure",
+      "name": "Amlodipine",
+      "dose": "5 mg",
+      "frequency": "once daily",
+      "instructions": "After breakfast",
+      "duration": "Ongoing",
+      "purpose": "Hypertension control"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Blood Sugar",
+      "name": "Metformin",
+      "dose": "500 mg",
+      "frequency": "twice daily",
+      "instructions": "After meals",
+      "duration": "Ongoing",
+      "purpose": "Blood sugar control"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Anti-inflammatory",
+      "name": "Ibuprofen",
+      "dose": "400 mg",
+      "frequency": "twice daily",
+      "instructions": "After food",
+      "duration": "5 days",
+      "purpose": "Inflammation relief"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Hormonal Therapy",
+      "name": "Progesterone",
+      "dose": "200 mg",
+      "frequency": "once daily",
+      "instructions": "Night time",
+      "duration": "14 days",
+      "purpose": "Hormonal balance"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Hormonal Therapy",
+      "name": "Estrogen Tablets",
+      "dose": "1 mg",
+      "frequency": "once daily",
+      "instructions": "After meals",
+      "duration": "21 days",
+      "purpose": "Hormone therapy"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Antidepressant",
+      "name": "Sertraline",
+      "dose": "50 mg",
+      "frequency": "once daily",
+      "instructions": "Morning",
+      "duration": "Ongoing",
+      "purpose": "Postpartum depression treatment"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Sleep Aid",
+      "name": "Melatonin",
+      "dose": "3 mg",
+      "frequency": "nightly",
+      "instructions": "Before sleep",
+      "duration": "30 days",
+      "purpose": "Sleep regulation"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Magnesium Supplement",
+      "name": "Magnesium Oxide",
+      "dose": "400 mg",
+      "frequency": "once daily",
+      "instructions": "After dinner",
+      "duration": "30 days",
+      "purpose": "Muscle relaxation"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Omega 3",
+      "name": "Fish Oil Capsule",
+      "dose": "1000 mg",
+      "frequency": "once daily",
+      "instructions": "After meals",
+      "duration": "12 weeks",
+      "purpose": "Heart health support"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Prenatal Vitamin",
+      "name": "Prenatal Multivitamin",
+      "dose": "1 tablet",
+      "frequency": "once daily",
+      "instructions": "After breakfast",
+      "duration": "Pregnancy period",
+      "purpose": "Pregnancy nutritional support"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Vitamin B12",
+      "name": "Cyanocobalamin",
+      "dose": "1000 mcg",
+      "frequency": "weekly",
+      "instructions": "Injection",
+      "duration": "8 weeks",
+      "purpose": "Vitamin B12 deficiency"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Anti-allergy",
+      "name": "Cetirizine",
+      "dose": "10 mg",
+      "frequency": "once daily",
+      "instructions": "Night",
+      "duration": "5 days",
+      "purpose": "Allergy relief"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Anti-nausea",
+      "name": "Ondansetron",
+      "dose": "4 mg",
+      "frequency": "twice daily",
+      "instructions": "Before meals",
+      "duration": "3 days",
+      "purpose": "Nausea treatment"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Digestive Enzyme",
+      "name": "Pancreatin",
+      "dose": "1 tablet",
+      "frequency": "twice daily",
+      "instructions": "After meals",
+      "duration": "10 days",
+      "purpose": "Digestive support"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Antifungal",
+      "name": "Fluconazole",
+      "dose": "150 mg",
+      "frequency": "single dose",
+      "instructions": "Oral",
+      "duration": "1 day",
+      "purpose": "Fungal infection treatment"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Antiviral",
+      "name": "Acyclovir",
+      "dose": "400 mg",
+      "frequency": "three times daily",
+      "instructions": "After food",
+      "duration": "5 days",
+      "purpose": "Viral infection treatment"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Pain Relief",
+      "name": "Diclofenac",
+      "dose": "50 mg",
+      "frequency": "twice daily",
+      "instructions": "After meals",
+      "duration": "5 days",
+      "purpose": "Pain relief"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Muscle Relaxant",
+      "name": "Cyclobenzaprine",
+      "dose": "10 mg",
+      "frequency": "once daily",
+      "instructions": "Night",
+      "duration": "7 days",
+      "purpose": "Muscle relaxation"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Anti-anxiety",
+      "name": "Clonazepam",
+      "dose": "0.5 mg",
+      "frequency": "once daily",
+      "instructions": "Night",
+      "duration": "7 days",
+      "purpose": "Anxiety reduction"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Vitamin A",
+      "name": "Retinol Capsule",
+      "dose": "5000 IU",
+      "frequency": "once daily",
+      "instructions": "After food",
+      "duration": "4 weeks",
+      "purpose": "Vision support"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Zinc Supplement",
+      "name": "Zinc Sulphate",
+      "dose": "50 mg",
+      "frequency": "once daily",
+      "instructions": "After meals",
+      "duration": "30 days",
+      "purpose": "Immune support"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Electrolyte",
+      "name": "ORS Solution",
+      "dose": "1 sachet",
+      "frequency": "when needed",
+      "instructions": "Mix in water",
+      "duration": "As required",
+      "purpose": "Hydration support"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Lactation Support",
+      "name": "Domperidone",
+      "dose": "10 mg",
+      "frequency": "three times daily",
+      "instructions": "Before meals",
+      "duration": "10 days",
+      "purpose": "Improve lactation"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Lactation Supplement",
+      "name": "Fenugreek Capsule",
+      "dose": "500 mg",
+      "frequency": "twice daily",
+      "instructions": "After meals",
+      "duration": "30 days",
+      "purpose": "Breast milk production"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Anti-inflammatory",
+      "name": "Naproxen",
+      "dose": "250 mg",
+      "frequency": "twice daily",
+      "instructions": "After meals",
+      "duration": "5 days",
+      "purpose": "Pain and inflammation"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Antacid",
+      "name": "Omeprazole",
+      "dose": "20 mg",
+      "frequency": "once daily",
+      "instructions": "Before breakfast",
+      "duration": "14 days",
+      "purpose": "Acidity relief"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Skin Care",
+      "name": "Topical Hydrocortisone",
+      "dose": "Apply thin layer",
+      "frequency": "twice daily",
+      "instructions": "External use",
+      "duration": "7 days",
+      "purpose": "Skin inflammation relief"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Antiseptic",
+      "name": "Povidone Iodine Ointment",
+      "dose": "Apply small amount",
+      "frequency": "twice daily",
+      "instructions": "External use",
+      "duration": "5 days",
+      "purpose": "Wound infection prevention"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Anti-diarrheal",
+      "name": "Loperamide",
+      "dose": "2 mg",
+      "frequency": "after loose stool",
+      "instructions": "Oral",
+      "duration": "3 days",
+      "purpose": "Diarrhea control"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Cough Suppressant",
+      "name": "Dextromethorphan",
+      "dose": "10 ml syrup",
+      "frequency": "twice daily",
+      "instructions": "After meals",
+      "duration": "5 days",
+      "purpose": "Cough suppression"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Expectorant",
+      "name": "Ambroxol",
+      "dose": "30 mg",
+      "frequency": "twice daily",
+      "instructions": "After food",
+      "duration": "5 days",
+      "purpose": "Mucus clearance"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Anti-histamine",
+      "name": "Loratadine",
+      "dose": "10 mg",
+      "frequency": "once daily",
+      "instructions": "Night",
+      "duration": "5 days",
+      "purpose": "Allergy treatment"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Eye Care",
+      "name": "Carboxymethylcellulose Eye Drops",
+      "dose": "2 drops",
+      "frequency": "three times daily",
+      "instructions": "External use",
+      "duration": "7 days",
+      "purpose": "Dry eye treatment"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Nasal Spray",
+      "name": "Oxymetazoline Spray",
+      "dose": "2 sprays",
+      "frequency": "twice daily",
+      "instructions": "Nasal use",
+      "duration": "5 days",
+      "purpose": "Nasal congestion relief"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Anticoagulant",
+      "name": "Aspirin",
+      "dose": "75 mg",
+      "frequency": "once daily",
+      "instructions": "After meals",
+      "duration": "Ongoing",
+      "purpose": "Blood clot prevention"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Lipid Control",
+      "name": "Atorvastatin",
+      "dose": "10 mg",
+      "frequency": "once daily",
+      "instructions": "Night",
+      "duration": "Ongoing",
+      "purpose": "Cholesterol control"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Bone Health",
+      "name": "Alendronate",
+      "dose": "70 mg",
+      "frequency": "weekly",
+      "instructions": "Morning empty stomach",
+      "duration": "12 weeks",
+      "purpose": "Osteoporosis treatment"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Joint Care",
+      "name": "Glucosamine",
+      "dose": "1500 mg",
+      "frequency": "once daily",
+      "instructions": "After meals",
+      "duration": "12 weeks",
+      "purpose": "Joint health support"
+    },
+    {
+      "medication_id": "MED-uuid",
+      "category": "Hair Health",
+      "name": "Biotin",
+      "dose": "5 mg",
+      "frequency": "once daily",
+      "instructions": "After food",
+      "duration": "12 weeks",
+      "purpose": "Hair growth support"
+    }
+  ]
+}

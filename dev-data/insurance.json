@@ -1,0 +1,44 @@
+{
+  "_id": "INS-SBI-001",
+  "scheme_name": "Health Secure",
+  "bank_name": "SBI",
+  "description": "Covers maternity and surgery with comprehensive postpartum care support.",
+  "eligibility": {
+    "required_age": 18,
+    "max_age": 65,
+    "target_group": "Women / Mothers"
+  },
+  "coverage": {
+    "coverage_min": 50000,
+    "coverage_max": 500000,
+    "coverage_areas": [
+      "Maternity",
+      "Surgery",
+      "Postpartum Care",
+      "Hospitalization"
+    ]
+  },
+  "metrics": {
+    "approval_rate": 92,
+    "processing_days": 7,
+    "clients_served": 5000
+  },
+  "status": {
+    "active": true
+  },
+  "analytics": {
+    "risk_level": "Low",
+    "recommended_for": [
+      "Pregnancy",
+      "Delivery",
+      "Postpartum Recovery"
+    ]
+  },
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-03-03T12:57:07.915Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-03T13:04:10.749Z"
+  }
+}

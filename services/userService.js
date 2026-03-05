@@ -13,7 +13,7 @@ const createUser = async (userData) => {
 };
 
 const updateUser = async (id, userData) => {
-    return await User.findByIdAndUpdate(id, userData, { new: true });
+    return await User.findByIdAndUpdate(id, userData, { returnDocument: 'after' });
 };
 
 const deleteUser = async (id) => {

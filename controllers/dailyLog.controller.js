@@ -102,7 +102,7 @@ const updateDailyLog = async (req, res, next) => {
     const log = await DailyLog.findOneAndUpdate(
       { _id: req.params.logId, user_id: req.user._id },
       { $set: req.body },
-      { new: true, runValidators: true }
+      { returnDocument: 'after', runValidators: true }
     );
 
     if (!log) return next(createError('Daily log not found.', 404));
@@ -113,7 +113,7 @@ const updateDailyLog = async (req, res, next) => {
     const summary = await HealthSummary.findOneAndUpdate(
       { log_id: log._id },
       { $set: healthSummaryData },
-      { new: true, upsert: true }
+      { returnDocument: 'after', upsert: true }
     );
 
     return res.status(200).json({

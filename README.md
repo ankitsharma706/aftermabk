@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-# aftermabk
-# aftermabk
-=======
 # AfterMaWell Backend (C++ Execution)
 
 This is a Node.js/Express backend service designed to compile and execute C++ programs. It is a standalone component within the AfterMaWell project.

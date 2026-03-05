@@ -1,0 +1,94 @@
+{
+  "summary_id": "summary-uuid",
+  "user_id": "user-uuid",
+  "generated_at": "2026-03-03",
+  "data_sources": {
+    "period_cycles_analyzed": 2,
+    "daily_logs_analyzed": 2
+  },
+  "clinical_vitals": {
+    "hydration_ratio_percent": 50,
+    "sleep_quality_percent": 75,
+    "pelvic_index": 0.0,
+    "activity_load_score": 1
+  },
+  "cycle_analysis": {
+    "average_cycle_length_days": 28,
+    "cycle_variance_days": 2,
+    "average_period_duration_days": 5,
+    "flow_pattern": "medium",
+    "next_predicted_period": "2026-02-27",
+    "next_ovulation_window": {
+      "start": "2026-02-12",
+      "end": "2026-02-16"
+    }
+  },
+  "symptom_analysis": {
+    "frequent_symptoms": [
+      "fatigue",
+      "back_pain",
+      "dizziness"
+    ],
+    "cramps_severity_score": 0,
+    "pain_average": 2
+  },
+  "wellness_scores": {
+    "mood_balance_score": 5,
+    "energy_level_score": 5,
+    "pain_intensity_score": 2,
+    "sleep_hours_average": 6,
+    "hydration_cups_average": 5
+  },
+  "readiness_indices": {
+    "tissue_restoration_percent": 82,
+    "pelvic_resilience_percent": 0,
+    "core_alignment_percent": 65
+  },
+  "behavior_patterns": {
+    "hydration_adherence_percent": 90,
+    "rest_efficiency_percent": 70,
+    "log_consistency_percent": 85
+  },
+  "lab_risk_assessment": {
+    "hemoglobin_status": "low",
+    "ferritin_status": "low",
+    "vitamin_d_status": "deficient",
+    "thyroid_status": "normal",
+    "glucose_status": "normal"
+  },
+  "overall_health_score": {
+    "afterma_readiness_score": 81,
+    "risk_level": "Moderate",
+    "doctor_consultation_recommended": true
+  },
+  "ai_recommendations": [
+    "Start iron supplementation to address anemia",
+    "Take vitamin D3 supplementation weekly",
+    "Increase water intake to 2–2.5 liters per day",
+    "Improve sleep duration to at least 7 hours",
+    "Begin pelvic floor strengthening exercises",
+    "Continue logging daily health data"
+  ],
+  "current_medications": [
+    "iron supplementation",
+    "vitamin D3 supplementation",
+    "pelvic floor strengthening exercises"
+  ],
+  "current_conditions": [
+    "anemia",
+    "vitamin D deficiency",
+    "pelvic floor weakness"
+  ],
+  "medicine": [
+    {
+      "medication_id": "MED-uuid"
+    },
+    {
+      "medication_id": "MED-uuid"
+    },
+    {
+      "medication_id": "MED-uuid"
+    }
+  ],
+  "clinincal_doctor_notes ": "Patient Priya Sharma, 30-year-old female from New Delhi, is currently in the luteal phase (Day 22) of a 28-day eumenorrhoeic cycle with clinically stable variance of ±2 days. No active bleeding or dysmenorrhoea reported on the observation date 26/02/2026. A premenstrual symptom cluster is noted — nausea, backache, pedal oedema, insomnia, dizziness, and fatigue — consistent with mild Premenstrual Syndrome (PMS). Mood is balanced; energy at moderate levels (5/10); pain intensity minimal (2/10)."
+}

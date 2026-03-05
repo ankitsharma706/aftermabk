@@ -10,6 +10,8 @@ const {
     getUserById,
     updateUser,
     deleteUser,
+    createUser,
+    changeUserRole,
     getMyCycleCalendar,
     logCalendarEvent,
     deleteCalendarEvent,
@@ -25,21 +27,70 @@ router.get(
     getAllUsers
 );
 
+// ── POST /api/users         (admin only)
+router.post(
+    '/',
+    protect,
+    restrictTo('admin'),
+    [
+        body('email').isEmail().normalizeEmail(),
+        body('full_name').optional().isLength({ min: 2, max: 150 })
+    ],
+    validate,
+    createUser
+);
+
+// ── POST /api/users/:userId/role (admin only)
+router.post(
+    '/:userId/role',
+    protect,
+    restrictTo('admin'),
+    [
+        body('role').isIn(['user', 'admin', 'doctor']).withMessage('Invalid role'),
+    ],
+    validate,
+    changeUserRole
+);
+
 // ── GET /api/users/:userId
 router.get('/:userId', protect, ownResource, getUserById);
 
-// ── PATCH /api/users/:userId
+// ── PATCH /api/users/:userId (also handling POST)
+const updateUserValidation = [
+    body('email').optional().isEmail().normalizeEmail(),
+    body('full_name').optional().isLength({ min: 2, max: 150 }),
+    body('weight_kg').optional().isFloat({ min: 30, max: 300 }),
+    body('cycle_length_days').optional().isInt({ min: 21, max: 45 }),
+    body('period_duration_days').optional().isInt({ min: 2, max: 10 }),
+];
+
 router.patch(
     '/:userId',
     protect,
     ownResource,
-    [
-        body('email').optional().isEmail().normalizeEmail(),
-        body('full_name').optional().isLength({ min: 2, max: 150 }),
-        body('weight_kg').optional().isFloat({ min: 30, max: 300 }),
-        body('cycle_length_days').optional().isInt({ min: 21, max: 45 }),
-        body('period_duration_days').optional().isInt({ min: 2, max: 10 }),
-    ],
+    updateUserValidation,
+    validate,
+    updateUser
+);
+
+// ── POST /api/users/:userId
+// Using POST to update the user resource so frontend/Postman doesn't have to use PATCH explicitly
+router.post(
+    '/:userId',
+    protect,
+    ownResource,
+    updateUserValidation,
+    validate,
+    updateUser
+);
+
+// ── PUT /api/users/:userId
+// Using PUT to update the user resource
+router.put(
+    '/:userId',
+    protect,
+    ownResource,
+    updateUserValidation,
     validate,
     updateUser
 );

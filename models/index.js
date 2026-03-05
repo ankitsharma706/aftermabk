@@ -9,6 +9,10 @@ const CommunityMember = require('./communityMember.model');
 const Ngo = require('./ngo.model');
 const InsurancePlan = require('./insurancePlan.model');
 const CalendarEvent = require('./calendarEvent.model');
+const Session = require('./session.model');
+const Medicine = require('./medicine.model');
+const Period = require('./period.model');
+const MedicalProfile = require('./medicalProfile.model');
 
 module.exports = {
   User,
@@ -20,4 +24,8 @@ module.exports = {
   Ngo,
   InsurancePlan,
   CalendarEvent,
+  Session,
+  Medicine,
+  Period,
+  MedicalProfile,
 };

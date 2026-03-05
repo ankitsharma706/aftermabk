@@ -1,0 +1,57 @@
+{
+  "log_id": "log-uuid",
+  "user_id": "user-uuid",
+  "daily_logs": [
+    {
+      "log_id": "log-uuid",
+      "date": "2026-02-20",
+      "journal_entry1": "true",
+      "journal_entry_duration1": "5min",  
+      "journal_entry_intesitity1": "light",  
+      "journal_entry2": "true",
+      "journal_entry_duration2": "5min",
+      "journal_entry_intesitity2": "moderate",
+      "journal_entry3": "true",
+      "journal_entry_duration3": "5min",
+      "journal_entry_intesitity3": "light",
+      "journal_entry4": "true",
+      "journal_entry_duration4": "5min",
+      "journal_entry_intesitity4": "strong",
+      "journal_entry5": "true",
+      "journal_entry_duration5": "5min",
+      "journal_entry_intesitity5": "light"
+    
+    },
+    {
+      "log_id": "log-uuid",
+      "date": "2026-02-21",
+      "journal_entry1": "true",
+      "journal_entry_duration1": "5min",
+      "journal_entry_intesitity1": "light",
+      "journal_entry2": "true",
+      "journal_entry_duration2": "5min",
+      "journal_entry_intesitity2": "light",
+      "journal_entry3": "true",
+      "journal_entry_duration3": "5min",
+      "journal_entry_intesitity3": "light",
+      "journal_entry4": "true",
+      "journal_entry_duration4": "5min",
+      "journal_entry_intesitity4": "light",
+      "journal_entry5": "true",
+      "journal_entry_duration5": "5min",
+      "journal_entry_intesitity5": "light"
+    }
+  ],
+  "daily_log_summary": {
+    "logs_recorded": 2,
+    "average_sleep_hours": 6,
+    "average_water_cups": 5,
+    "average_pain_level": 2,
+    "average_mood_score": 5.5,
+    "average_energy_level": 5
+  },
+  "timestamps": {
+    "last_updated": "2026-02-21T21:00:00Z",
+    "created_at": "2026-02-20T21:00:00Z"
+  }
+}

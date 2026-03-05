@@ -1,0 +1,243 @@
+# 🌸 AFTERMA Backend — Complete API Reference
+
+**Base URL:** `http://localhost:5000`  
+**All protected routes require:** `Authorization: Bearer <token>`
+
+---
+
+## 🔐 Auth (`/api/auth`)
+
+| Method | Endpoint | Access | Description |
+|--------|----------|--------|-------------|
+| `POST` | `/api/auth/register` | Public | Register new user |
+| `POST` | `/api/auth/login` | Public | Login and get token |
+| `GET` | `/api/auth/me` | Protected | Get logged-in user info |
+| `POST` | `/api/auth/refresh` | Public | Refresh JWT token |
+| `PATCH` | `/api/auth/change-password` | Protected | Change password |
+| `POST` | `/api/auth/send-otp` | Public | Send phone OTP |
+| `POST` | `/api/auth/verify-otp` | Public | Verify phone OTP |
+
+---
+
+## 👩 User (`/api/user` or `/api/users`)
+
+| Method | Endpoint | Access | Description |
+|--------|----------|--------|-------------|
+| `POST` | `/api/user` | Admin | Create a user directly |
+| `GET` | `/api/user` | Admin | Get all users (paginated) |
+| `GET` | `/api/user/{{id}}` | Owner/Admin | Get user by ID |
+| `POST` | `/api/user/{{id}}` | Owner/Admin | Update user profile (POST alias) |
+| `PATCH` | `/api/user/{{id}}` | Owner/Admin | Update user profile |
+| `DELETE` | `/api/user/{{id}}` | Owner/Admin | Delete user account |
+| `POST` | `/api/user/{{id}}/role` | Admin | Change user role (`user`/`admin`/`doctor`) |
+| `GET` | `/api/user/me/calendar` | Protected | Get cycle calendar |
+| `POST` | `/api/user/me/calendar` | Protected | Log calendar event |
+| `DELETE` | `/api/user/me/calendar/{{eventId}}` | Protected | Delete calendar event |
+
+**Update body (sample):**
+```json
+{
+  "full_name": "Anjali Sharma",
+  "email": "anjali@example.com",
+  "maternity_stage": "Postpartum",
+  "delivery_method": "Vaginal Delivery",
+  "privacy_mode": "Public",
+  "allergies": ["apple", "dalma"],
+  "medical_history": []
+}
+```
+
+**Change Role body:**
+```json
+{ "role": "admin" }
+```
+
+---
+
+## 🩺 Doctor (`/api/doctor` or `/api/doctors`)
+
+| Method | Endpoint | Access | Description |
+|--------|----------|--------|-------------|
+| `GET` | `/api/doctor` | Public | Get all doctors (paginated + filters) |
+| `GET` | `/api/doctor/{{id}}` | Public | Get doctor by ID |
+| `POST` | `/api/doctor` | Admin | Create doctor profile |
+| `PATCH` | `/api/doctor/{{id}}` | Admin | Update doctor |
+| `DELETE` | `/api/doctor/{{id}}` | Admin | Delete doctor |
+
+**Query params:** `?specialization=OBGYN&city=Delhi&rating_min=4.5&search=Kavitha`
+
+**Create body:**
+```json
+{
+  "name": "Dr. Kavitha Menon",
+  "email": "kavitha@hospital.com",
+  "specialization": "OBGYN",
+  "experience_years": 14,
+  "session_fee": 1500,
+  "hospital": "Apollo Hospitals",
+  "city": "Delhi",
+  "registration_number": "MCI-983452112"
+}
+```
+
+---
+
+## 📅 Sessions (`/api/session` or `/api/sessions`)
+
+| Method | Endpoint | Access | Description |
+|--------|----------|--------|-------------|
+| `POST` | `/api/session` | Protected | Book a new session |
+| `GET` | `/api/session` | Admin | Get all sessions |
+| `GET` | `/api/session/me` | Protected | Get my sessions |
+| `GET` | `/api/session/doctor/{{doctorId}}` | Admin/Doctor | Get doctor's sessions |
+| `GET` | `/api/session/{{id}}` | Protected | Get session by ID |
+| `PATCH` | `/api/session/{{id}}` | Protected | Update session details |
+| `POST` | `/api/session/{{id}}/cancel` | Protected | Cancel a session |
+| `DELETE` | `/api/session/{{id}}` | Admin | Delete session record |
+
+**Book session body:**
+```json
+{
+  "doctor_id": "{{doctorId}}",
+  "session_date": "2026-03-15",
+  "session_time": "10:00",
+  "session_type": "video",
+  "session_fee": 1200
+}
+```
+
+**Cancel session body:**
+```json
+{ "reason": "Personal emergency" }
+```
+
+**Filter my sessions:** `GET /api/session/me?session_status=upcoming`
+
+---
+
+## 🩸 Period Tracking (`/api/period`)
+
+| Method | Endpoint | Access | Description |
+|--------|----------|--------|-------------|
+| `POST` | `/api/period` | Protected | Create period record |
+| `GET` | `/api/period/me` | Protected | Get my period data |
+| `GET` | `/api/period/user/{{userId}}` | Admin/Doctor | Get user's period data |
+| `POST` | `/api/period/cycle` | Protected | Add a new cycle entry |
+| `PATCH` | `/api/period` | Protected | Update cycle settings/predictions |
+| `DELETE` | `/api/period` | Protected | Delete period record |
+
+**Create body:**
+```json
+{
+  "cycle_settings": {
+    "average_cycle_length_days": 28,
+    "average_period_length_days": 5,
+    "cycle_variance_days": 2
+  }
+}
+```
+
+**Add cycle body:**
+```json
+{
+  "period_start_date": "2026-01-02",
+  "period_end_date": "2026-01-06",
+  "flow_pattern": "medium",
+  "symptoms_reported": ["cramps", "fatigue"],
+  "daily_flow": [
+    { "day": 1, "flow": "heavy", "pain_level": 5 },
+    { "day": 2, "flow": "medium", "pain_level": 3 }
+  ]
+}
+```
+
+---
+
+## 🏥 Medical Profile (`/api/medical-profile`)
+
+| Method | Endpoint | Access | Description |
+|--------|----------|--------|-------------|
+| `POST` | `/api/medical-profile` | Protected | Create medical profile |
+| `GET` | `/api/medical-profile/me` | Protected | Get my medical profile |
+| `GET` | `/api/medical-profile/user/{{userId}}` | Admin/Doctor | Get user's medical profile |
+| `PATCH` | `/api/medical-profile/me` | Protected | Update my profile |
+| `PATCH` | `/api/medical-profile/user/{{userId}}/labs` | Admin/Doctor | Update lab values |
+| `DELETE` | `/api/medical-profile/me` | Protected | Delete profile |
+
+**Create/Update body:**
+```json
+{
+  "blood_group": "B+",
+  "weight_kg": 58,
+  "height_cm": 161,
+  "city": "New Delhi",
+  "state": "Delhi",
+  "symptoms": ["fatigue", "back_pain", "dizziness"],
+  "current_conditions": ["anemia", "vitamin D deficiency"],
+  "allergies": ["Penicillin"],
+  "family": {
+    "primary_contact_name": "Rohit Sharma",
+    "primary_contact_number": "+91-9123456789",
+    "relationship": "Husband"
+  }
+}
+```
+
+**Update labs body (doctor fills this):**
+```json
+{
+  "haemoglobin_level": 10.8,
+  "thyroid_level": 2.8,
+  "vitamin_d3_level": 18,
+  "glucose_level": 88,
+  "ferritin_level": 9,
+  "lab_risk_assessment": {
+    "hemoglobin_status": "low",
+    "ferritin_status": "low",
+    "vitamin_d_status": "deficient",
+    "thyroid_status": "normal",
+    "glucose_status": "normal"
+  }
+}
+```
+
+---
+
+## 💊 Medicines (`/api/medicine` or `/api/medicines`)
+
+| Method | Endpoint | Access | Description |
+|--------|----------|--------|-------------|
+| `GET` | `/api/medicine` | Public | Get all medicines (filterable) |
+| `GET` | `/api/medicine/{{id}}` | Public | Get medicine by ID |
+| `POST` | `/api/medicine` | Admin | Add medicine to catalog |
+| `PATCH` | `/api/medicine/{{id}}` | Admin | Update medicine |
+| `DELETE` | `/api/medicine/{{id}}` | Admin | Delete medicine |
+
+**Query params:** `?category=Iron+Folic+Acid&search=Ferrous`
+
+**Create body:**
+```json
+{
+  "category": "Iron + Folic Acid",
+  "name": "Ferrous Sulphate",
+  "dose": "200 mg",
+  "frequency": "1 tablet once daily",
+  "instructions": "After food",
+  "duration": "8 weeks",
+  "purpose": "Iron deficiency treatment"
+}
+```
+
+---
+
+## 📓 Daily Logs (`/api/logs`)
+| `POST /api/logs` | `GET /api/logs` | `GET /api/logs/{{id}}` | `PATCH /api/logs/{{id}}` | `DELETE /api/logs/{{id}}`
+
+## 🤝 Communities (`/api/communities`)
+| `GET /api/communities` | `GET /api/communities/{{id}}` | `POST` | `PATCH` | `DELETE`
+
+## 🏛️ NGOs (`/api/ngos`)
+| `GET /api/ngos` | `GET /api/ngos/{{id}}` | `POST` | `PATCH` | `DELETE`
+
+## 🏦 Insurance (`/api/insurance`)
+| `GET /api/insurance` | `GET /api/insurance/{{id}}` | `POST` | `PATCH` | `DELETE`

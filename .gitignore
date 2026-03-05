@@ -7,7 +7,7 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-
+patient_medical_report.html
 node_modules
 dist
 dist-ssr

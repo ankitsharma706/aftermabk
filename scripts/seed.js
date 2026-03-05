@@ -29,7 +29,7 @@ const seed = async () => {
         maternity_stage: 'Tracking',
       }
     },
-    { upsert: true, new: true }
+    { upsert: true, returnDocument: 'after' }
   );
 
   const aditi = await User.findOneAndUpdate(
@@ -58,7 +58,7 @@ const seed = async () => {
         is_verified: true,
       }
     },
-    { upsert: true, new: true }
+    { upsert: true, returnDocument: 'after' }
   );
 
   console.log(`✅ Users: admin (${adminUser.email}), user (${aditi.email})`);

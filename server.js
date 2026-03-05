@@ -20,6 +20,10 @@ const doctorRoutes = require('./routes/doctor.routes');
 const communityRoutes = require('./routes/community.routes');
 const ngoRoutes = require('./routes/ngo.routes');
 const insuranceRoutes = require('./routes/insurance.routes');
+const sessionRoutes = require('./routes/session.routes');
+const medicineRoutes = require('./routes/medicine.routes');
+const periodRoutes = require('./routes/period.routes');
+const medicalProfileRoutes = require('./routes/medicalProfile.routes');
 
 const app = express();
 
@@ -47,7 +51,7 @@ const limiter = rateLimit({
 
 const authLimiter = rateLimit({
     windowMs: 15 * 60 * 1000,
-    max: 20, // stricter on auth endpoints
+    max: 20,
     message: {
         status: 'error',
         message: 'Too many authentication attempts. Please wait 15 minutes.',
@@ -71,9 +75,22 @@ app.get('/', (req, res) => {
     res.json({
         status: 'success',
         message: '🌸 AFTERMA Healthcare Recovery Platform API',
-        version: '1.0.0',
+        version: '2.0.0',
         environment: config.env,
         timestamp: new Date().toISOString(),
+        endpoints: {
+            auth: '/api/auth',
+            users: '/api/users  |  /api/user',
+            doctors: '/api/doctors',
+            sessions: '/api/sessions',
+            period: '/api/period',
+            medicalProfile: '/api/medical-profile',
+            medicines: '/api/medicines',
+            dailyLogs: '/api/logs',
+            communities: '/api/communities',
+            ngos: '/api/ngos',
+            insurance: '/api/insurance',
+        },
     });
 });
 
@@ -89,8 +106,20 @@ app.get('/api/health', (req, res) => {
 // ── API Routes ────────────────────────────────────────────────
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
-app.use('/api/logs', dailyLogRoutes);
+app.use('/api/user', userRoutes);           // singular alias
+
 app.use('/api/doctors', doctorRoutes);
+app.use('/api/doctor', doctorRoutes);         // singular alias
+
+app.use('/api/sessions', sessionRoutes);
+app.use('/api/session', sessionRoutes);        // singular alias
+
+app.use('/api/period', periodRoutes);
+app.use('/api/medical-profile', medicalProfileRoutes);
+app.use('/api/medicines', medicineRoutes);
+app.use('/api/medicine', medicineRoutes);       // singular alias
+
+app.use('/api/logs', dailyLogRoutes);
 app.use('/api/communities', communityRoutes);
 app.use('/api/ngos', ngoRoutes);
 app.use('/api/insurance', insuranceRoutes);
@@ -110,10 +139,20 @@ const startServer = async () => {
     app.listen(PORT, () => {
         console.log('');
         console.log('  🌸 ══════════════════════════════════════════ 🌸');
-        console.log(`      AFTERMA Backend running on port ${PORT}`);
+        console.log(`      AFTERMA Backend v2.0 running on port ${PORT}`);
         console.log(`      Environment : ${config.env}`);
         console.log(`      Mongo URI   : ${config.database.uri}`);
         console.log(`      URL         : http://localhost:${PORT}`);
+        console.log('');
+        console.log('  📡 Active Routes:');
+        console.log('      POST/GET  /api/auth/register | login | me');
+        console.log('      CRUD      /api/user | /api/users');
+        console.log('      CRUD      /api/doctor | /api/doctors');
+        console.log('      CRUD      /api/session | /api/sessions');
+        console.log('      CRUD      /api/period');
+        console.log('      CRUD      /api/medical-profile');
+        console.log('      CRUD      /api/medicine | /api/medicines');
+        console.log('      CRUD      /api/logs | /api/communities | /api/ngos | /api/insurance');
         console.log('  🌸 ══════════════════════════════════════════ 🌸');
         console.log('');
     });
@@ -135,4 +174,4 @@ process.on('unhandledRejection', (reason) => {
     process.exit(1);
 });
 
-module.exports = app; // for testing
+module.exports = app;

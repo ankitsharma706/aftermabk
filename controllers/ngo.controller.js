@@ -52,7 +52,7 @@ const updateNgo = async (req, res, next) => {
     const ngo = await Ngo.findByIdAndUpdate(
       req.params.ngoId,
       { $set: req.body },
-      { new: true, runValidators: true }
+      { returnDocument: 'after', runValidators: true }
     );
     if (!ngo) return next(createError('NGO not found.', 404));
     return res.status(200).json({ status: 'success', data: { ngo } });

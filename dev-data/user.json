@@ -1,0 +1,75 @@
+{
+  "person_profile": {
+    "person_id": 1,
+    "full_name": "Aditi Sharma",
+    "Dob": "1997-01-01",
+    "blood_group": "A+",
+    "cycle_length_days": "28",
+    "delivery_type": "C-section",
+    "phase": "postpartum",
+    "profile_picture_url": "/images/aditi.jpg",
+    "summary_id": "summary-uuid",
+    "period_id": "period-uuid",
+    "log_id": "log-uuid",
+    "password_hash": "$2a$12$JxiaXpOvn.vBCHHB5QN3BOLICTw/qbfixG7V7g.LHqP8WpZ2m8Ote",
+    "aadhar_number": "123456789012",
+    "address": "iter soa university ",
+    "city": "bbsr",
+    "session_id": "session-uuid",
+    "booking_id": "booking-uuid",
+    "pincode": "751030",
+    "state": "odisha",
+    "insurance_id ": "insurance-uuid",
+    "country": "india",
+    "weight_kg": "60",
+    "height_cm": "160",
+    "bmi": "23.4",
+    "haemoglobin_level": "12",
+    "thyroid_level": "12",
+    "vitamin_d3_level": "12",
+    "glucose_level": "12",
+    "ferritin_level": "12",
+    "serum_ferritin_level": "12",
+    "symboms": [
+      "fatigue",
+      "back_pain",
+      "dizziness"
+    ],
+    "contact": {
+      "email": "[EMAIL_ADDRESS]",
+      "phone": "+91-9876543210"
+    },
+    "family": {
+      "primary_contact_name": "Rohit Sharma",
+      "primary_contact_number": "+91-9123456789",
+      "family_member_name": "Neha Sharma",
+      "relationship": "Husband"
+    },
+    "privacy_mode": true,
+    "preferences": {
+      "preferred_language": "Hindi",
+      "preferred_reminder_time": "08:00",
+      "data_visibility": [
+        "Family",
+        "Doctor"
+      ]
+    },
+    "subscription": true
+  },
+  "doctor_id": "doc-uuid",
+  "appointments": {
+    "last_visit": "2026-02-01",
+    "next_appointment": "2026-03-01",
+    "mode": "In-person"
+  },
+  "care_circle_id": "care-circle-uuid",
+  "resource_library": {
+    "recommended_today": [
+      {
+        "title": "Gentle Breathing for Recovery",
+        "category": "Guided Video",
+        "duration_minutes": 5
+      }
+    ]
+  }
+}

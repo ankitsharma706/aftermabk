@@ -55,7 +55,7 @@ const updateInsurancePlan = async (req, res, next) => {
     const plan = await InsurancePlan.findByIdAndUpdate(
       req.params.planId,
       { $set: req.body },
-      { new: true, runValidators: true }
+      { returnDocument: 'after', runValidators: true }
     );
     if (!plan) return next(createError('Insurance plan not found.', 404));
     return res.status(200).json({ status: 'success', data: { plan } });

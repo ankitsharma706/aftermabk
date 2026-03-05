@@ -70,7 +70,7 @@ const updateCommunity = async (req, res, next) => {
     const community = await Community.findByIdAndUpdate(
       req.params.communityId,
       { $set: updates },
-      { new: true, runValidators: true }
+      { returnDocument: 'after', runValidators: true }
     );
     if (!community) return next(createError('Community not found.', 404));
     return res.status(200).json({ status: 'success', data: { community } });

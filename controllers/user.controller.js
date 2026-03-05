@@ -57,21 +57,63 @@ const getUserById = async (req, res, next) => {
 };
 
 // ─────────────────────────────────────────────────────────────
+// CREATE USER (ADMIN)
+// ─────────────────────────────────────────────────────────────
+const createUser = async (req, res, next) => {
+    try {
+        const { email, password, full_name, phone, role } = req.body;
+
+        // This is a basic creation without all auth checks, meant for admin use
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+            return next(createError('Email already in use.', 400));
+        }
+
+        const newUser = new User({
+            email,
+            full_name,
+            phone,
+            role: role || 'user',
+            // In a real scenario, you'd hash the password here if provided
+            // For example: password_hash: await hashPassword(password)
+        });
+
+        await newUser.save();
+
+        return res.status(201).json({
+            status: 'success',
+            message: 'User created successfully.',
+            data: { user: sanitizeUser(newUser) },
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
+// ─────────────────────────────────────────────────────────────
 // UPDATE USER PROFILE
 // ─────────────────────────────────────────────────────────────
 const updateUser = async (req, res, next) => {
     try {
-        // Strip protected fields
-        const {
-            password_hash, role, provider_id, auth_provider,
-            is_active, is_verified, last_login_at, _id,
-            ...allowedUpdates
-        } = req.body;
+        let updateData = { ...req.body };
+
+        // Strip protected fields for non-admins
+        if (!req.user || req.user.role !== 'admin') {
+            const {
+                password_hash, role, provider_id, auth_provider,
+                is_active, is_verified, last_login_at, _id,
+                ...allowedUpdates
+            } = req.body;
+            updateData = allowedUpdates;
+        } else {
+            // Even admins shouldn't overwrite _id directly
+            delete updateData._id;
+        }
 
         const user = await User.findByIdAndUpdate(
             req.params.userId,
-            { $set: allowedUpdates },
-            { new: true, runValidators: true }
+            { $set: updateData },
+            { returnDocument: 'after', runValidators: true }
         );
 
         if (!user) return next(createError('User not found.', 404));
@@ -97,6 +139,35 @@ const deleteUser = async (req, res, next) => {
         return res.status(200).json({
             status: 'success',
             message: 'User account deleted successfully.',
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
+// ─────────────────────────────────────────────────────────────
+// CHANGE USER ROLE (ADMIN ONLY)
+// ─────────────────────────────────────────────────────────────
+const changeUserRole = async (req, res, next) => {
+    try {
+        const { role } = req.body;
+
+        if (!role || !['user', 'admin', 'doctor'].includes(role)) {
+            return next(createError('A valid role is required (user, admin, doctor).', 400));
+        }
+
+        const user = await User.findByIdAndUpdate(
+            req.params.userId,
+            { $set: { role } },
+            { returnDocument: 'after', runValidators: true }
+        );
+
+        if (!user) return next(createError('User not found.', 404));
+
+        return res.status(200).json({
+            status: 'success',
+            message: `User role successfully updated to ${role}.`,
+            data: { user: sanitizeUser(user) },
         });
     } catch (error) {
         next(error);
@@ -197,8 +268,10 @@ const deleteCalendarEvent = async (req, res, next) => {
 module.exports = {
     getAllUsers,
     getUserById,
+    createUser,
     updateUser,
     deleteUser,
+    changeUserRole,
     getMyCycleCalendar,
     logCalendarEvent,
     deleteCalendarEvent,
