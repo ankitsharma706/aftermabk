@@ -8,6 +8,7 @@ module.exports = {
   DailyLog: require('./DailyLog'),
   PeriodLog: require('./PeriodLog'),
   Community: require('./Community'),
+  Question: require('./Question'),
   Ngo: require('./Ngo'),
   Medicine: require('./Medicine'),
   InsurancePlan: require('./InsurancePlan'),
