@@ -27,7 +27,7 @@ const seedUser = async () => {
   const password_hash = await bcrypt.hash(data.password || 'Password@123', 12);
   const { password, ...userData } = data;
   const user = await User.create({ ...userData, password_hash });
-  console.log(`  ✅ Users          — 1 inserted (${user.email})`);
+  console.log(`  ✅ Users          — ${user.length} inserted (${user.email})`);
   return user;
 };
 
@@ -35,9 +35,19 @@ const seedUser = async () => {
 const seedDoctors = async () => {
   const data = read('doctor.json');
   if (!data) return [];
+
   await Doctor.deleteMany({});
-  const doctors = await Doctor.insertMany(data);
-  console.log(`  ✅ Doctors        — ${doctors.length} inserted`);
+
+  const hashedDoctors = await Promise.all(
+    data.flat().map(async (d) => ({
+      ...d,
+      password_hash: await bcrypt.hash(d.password_hash || 'Password@123', 10),
+    }))
+  );
+
+  const doctors = await Doctor.insertMany(hashedDoctors);
+
+  console.log(`  ✅ Doctors — ${doctors.length} inserted`);
   return doctors;
 };
 
@@ -161,16 +171,17 @@ const run = async () => {
     console.log(`  ✅ Connected: ${mongoose.connection.host} / ${mongoose.connection.name}\n`);
     console.log('  📦 Importing seed data...\n');
 
-    const user = await seedUser();
-    const doctors = await seedDoctors();
+    // const user = await seedUser();
+    // const doctors = await seedDoctors();
 
-    await seedSessions(user, doctors);
-    await seedLactation(user);
-    await seedDailyLogs(user);
-    await seedPeriodLogs(user);
-    await seedCommunities();
-    await seedNgos();
-    await seedMedicines();
+    // await seedSessions( doctors);
+    // await seedSessions(user, doctors);
+    // await seedLactation(user);
+    // await seedDailyLogs(user);
+    // await seedPeriodLogs(user);
+    // await seedCommunities();
+    // await seedNgos();
+    // await seedMedicines();
     await seedInsurance();
 
     console.log('\n  🌸 All data imported into the `afterma` database!');

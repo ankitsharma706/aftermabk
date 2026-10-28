@@ -26,3 +26,4 @@ test-patch
 *.njsproj
 *.sln
 *.sw?
+# users-check.json

@@ -1,240 +1,515 @@
 [
   {
     "name": "Dr. Shweta Singh",
-    "email": "[EMAIL_ADDRESS]",
-    "password": "Password@123",
-    "phone": "+91-9812340001",
-    "registration_number": "MCI-576853864",
+    "gender": "F",
+    "qualifications": "MPT",
+    "practice_type": "hospital",
+    "email": "shweta.singh@example.com",
+    "phone": "9812340001",
+    "certifications_license": {
+      "registration_number": "MCI-576853864",
+      "licensing_authority": "Medical Council of India",
+      "specialty": "Physiotherapy",
+      "experience_years": 10,
+      "clinic_hospital_affiliation": "City Care Hospital",
+      "supporting_documents": [
+        "/docs/license1.pdf",
+        "/docs/certificate1.pdf"
+      ]
+    },
+    "password_hash": "Password@123",
+    "agree_on_documentations": true,
     "specialization": "Physiotherapy",
     "sub_specialty": "Postpartum Core Recovery",
     "designation": "Pelvic Specialist",
     "credentials": "MPT, Women's Health Expert",
     "quote": "Restoring core stability is a journey of layers, not speed.",
+    "short_biography": "Experienced physiotherapist specializing in women's health and postpartum recovery.",
+    "area_of_expertise": "Pelvic floor rehabilitation, postpartum care, core strengthening",
     "profile_picture_url": "/images/doctors/shweta_singh.jpg",
     "rating": 4.9,
     "review_count": 134,
-    "location": "Mumbai",
+    "language_spoken": [
+      "English",
+      "Hindi"
+    ],
+    "location": {
+      "full_address": "123 Main St, Mumbai, Maharashtra 400001",
+      "city": "Mumbai",
+      "pincode": "400001",
+      "state": "Maharashtra",
+      "country": "India"
+    },
     "facility_name": "City Care Hospital",
     "facility_address": "123 Main St, Mumbai, Maharashtra 400001",
-    "experience_years": 10,
-    "session_fee": 1200,
-    "currency": "INR",
+    "session": {
+      "available_days": [
+        "mon",
+        "tue",
+        "wed",
+        "thur",
+        "fri"
+      ],
+      "session_fee": 1200,
+      "start_time": "09:00",
+      "end_time": "17:00",
+      "currency": "INR",
+      "buffer_time": 15
+    },
+    "urgent_patient_alerts": {
+      "enable_urgent_alerts": true,
+      "notification_channel": "push",
+      "quiet_hours_dnd": {
+        "start_time": "22:00",
+        "end_time": "06:00"
+      }
+    },
     "available_for_booking": true,
     "active": true,
-    "verified": true
+    "verified": true,
+    "professional_identity": {
+      "policy_number": "INS-99887766",
+      "insurance_provider": "ICICI Lombard",
+      "coverage_amount": "₹10,00,000",
+      "expiry_date": "2027-12-31",
+      "proof_of_insurance": "/docs/insurance.pdf"
+    }
   },
   {
     "name": "Dr. Kavitha Menon",
+    "gender": "F",
+    "practice_type": "hospital",
     "email": "kavitha.menon@afterma.app",
-    "password": "Password@123",
-    "phone": "+91-9812340002",
-    "registration_number": "MCI-983452112",
+    "phone": "9812340002",
+    "certifications_license": {
+      "registration_number": "MCI-983452112",
+      "licensing_authority": "Medical Council of India",
+      "specialty": "OBGYN",
+      "experience_years": 14,
+      "clinic_hospital_affiliation": "Apollo Hospitals",
+      "supporting_documents": []
+    },
+    "password_hash": "Password@123",
+    "agree_on_documentations": true,
     "specialization": "OBGYN",
     "sub_specialty": "Maternal Health",
     "designation": "Senior Gynecologist",
     "credentials": "MS OBGYN, AIIMS Delhi",
     "quote": "Healthy mothers build healthy generations.",
+    "short_biography": "Experienced gynecologist specializing in maternal health.",
+    "area_of_expertise": "Pregnancy care, maternal health",
     "profile_picture_url": "/images/doctors/kavitha_menon.jpg",
     "rating": 4.8,
     "review_count": 210,
-    "location": "Delhi",
+    "language_spoken": [
+      "English",
+      "Hindi"
+    ],
+    "location": {
+      "full_address": "Sarita Vihar, New Delhi 110076",
+      "city": "Delhi",
+      "pincode": "110076",
+      "state": "Delhi",
+      "country": "India"
+    },
     "facility_name": "Apollo Hospitals",
     "facility_address": "Sarita Vihar, New Delhi 110076",
-    "experience_years": 14,
-    "session_fee": 1500,
-    "currency": "INR",
+    "session": {
+      "available_days": [
+        "mon",
+        "tue",
+        "wed",
+        "thur",
+        "fri"
+      ],
+      "session_fee": 1500,
+      "start_time": "09:00",
+      "end_time": "17:00",
+      "currency": "INR",
+      "buffer_time": 15
+    },
+    "urgent_patient_alerts": {
+      "enable_urgent_alerts": false,
+      "quiet_hours_dnd": {
+        "start_time": "22:00",
+        "end_time": "06:00"
+      }
+    },
     "available_for_booking": true,
     "active": true,
     "verified": true
   },
   {
     "name": "Dr. Ananya Kapoor",
+    "gender": "F",
+    "practice_type": "hospital",
     "email": "ananya.kapoor@afterma.app",
-    "password": "Password@123",
-    "phone": "+91-9812340003",
-    "registration_number": "MCI-762398112",
+    "phone": "9812340003",
+    "certifications_license": {
+      "registration_number": "MCI-762398112",
+      "licensing_authority": "Medical Council of India",
+      "specialty": "Gynecology",
+      "experience_years": 11,
+      "clinic_hospital_affiliation": "Manipal Hospital",
+      "supporting_documents": []
+    },
+    "password_hash": "Password@123",
+    "agree_on_documentations": true,
     "specialization": "Gynecology",
     "sub_specialty": "Hormonal Balance",
     "designation": "Women's Wellness Expert",
     "credentials": "MD Gynecology",
     "quote": "Hormonal balance begins with listening to the body.",
+    "short_biography": "Specialist in hormonal and women's wellness.",
+    "area_of_expertise": "Hormonal balance, reproductive health",
     "profile_picture_url": "/images/doctors/ananya_kapoor.jpg",
     "rating": 4.7,
     "review_count": 165,
-    "location": "Bangalore",
+    "language_spoken": [
+      "English",
+      "Hindi"
+    ],
+    "location": {
+      "full_address": "Old Airport Rd, Bangalore 560017",
+      "city": "Bangalore",
+      "pincode": "560017",
+      "state": "Karnataka",
+      "country": "India"
+    },
     "facility_name": "Manipal Hospital",
     "facility_address": "Old Airport Rd, Bangalore 560017",
-    "experience_years": 11,
-    "session_fee": 1300,
-    "currency": "INR",
+    "session": {
+      "available_days": [
+        "mon",
+        "tue",
+        "wed",
+        "thur",
+        "fri"
+      ],
+      "session_fee": 1300,
+      "start_time": "10:00",
+      "end_time": "18:00",
+      "currency": "INR",
+      "buffer_time": 15
+    },
+    "urgent_patient_alerts": {
+      "enable_urgent_alerts": false,
+      "quiet_hours_dnd": {
+        "start_time": "22:00",
+        "end_time": "06:00"
+      }
+    },
     "available_for_booking": true,
     "active": true,
     "verified": true
   },
   {
     "name": "Dr. Neha Agarwal",
+    "gender": "F",
+    "practice_type": "clinic",
     "email": "neha.agarwal@afterma.app",
-    "password": "Password@123",
-    "phone": "+91-9812340004",
-    "registration_number": "MCI-882314221",
+    "phone": "9812340004",
+    "certifications_license": {
+      "registration_number": "MCI-882314221",
+      "licensing_authority": "Medical Council of India",
+      "specialty": "Dietician",
+      "experience_years": 9,
+      "clinic_hospital_affiliation": "Ruby Hall Clinic",
+      "supporting_documents": []
+    },
+    "password_hash": "Password@123",
+    "agree_on_documentations": true,
     "specialization": "Dietician",
     "sub_specialty": "Postpartum Nutrition",
     "designation": "Nutrition Specialist",
     "credentials": "MSc Clinical Nutrition",
     "quote": "Nutrition rebuilds strength after birth.",
+    "short_biography": "Focused on postpartum recovery nutrition.",
+    "area_of_expertise": "Diet plans, postpartum nutrition",
     "profile_picture_url": "/images/doctors/neha_agarwal.jpg",
     "rating": 4.8,
     "review_count": 142,
-    "location": "Pune",
+    "language_spoken": [
+      "English",
+      "Hindi"
+    ],
+    "location": {
+      "full_address": "40 Sassoon Rd, Pune 411001",
+      "city": "Pune",
+      "pincode": "411001",
+      "state": "Maharashtra",
+      "country": "India"
+    },
     "facility_name": "Ruby Hall Clinic",
     "facility_address": "40 Sassoon Rd, Pune 411001",
-    "experience_years": 9,
-    "session_fee": 900,
-    "currency": "INR",
+    "session": {
+      "available_days": [
+        "mon",
+        "tue",
+        "wed",
+        "thur",
+        "fri"
+      ],
+      "session_fee": 900,
+      "start_time": "09:30",
+      "end_time": "16:30",
+      "currency": "INR",
+      "buffer_time": 10
+    },
+    "urgent_patient_alerts": {
+      "enable_urgent_alerts": false,
+      "quiet_hours_dnd": {
+        "start_time": "22:00",
+        "end_time": "06:00"
+      }
+    },
     "available_for_booking": true,
     "active": true,
     "verified": true
   },
   {
     "name": "Dr. Ritu Sharma",
+    "gender": "F",
+    "practice_type": "teleconsultant",
     "email": "ritu.sharma@afterma.app",
-    "password": "Password@123",
-    "phone": "+91-9812340005",
-    "registration_number": "MCI-564783221",
+    "phone": "9812340005",
+    "certifications_license": {
+      "registration_number": "MCI-564783221",
+      "licensing_authority": "Medical Council of India",
+      "specialty": "Psychology",
+      "experience_years": 12,
+      "clinic_hospital_affiliation": "Fortis Hospital",
+      "supporting_documents": []
+    },
+    "password_hash": "Password@123",
+    "agree_on_documentations": true,
     "specialization": "Psychology",
     "sub_specialty": "Postpartum Depression",
     "designation": "Mental Wellness Coach",
     "credentials": "PhD Clinical Psychology",
     "quote": "Mental recovery is as important as physical healing.",
+    "short_biography": "Expert in postpartum mental health.",
+    "area_of_expertise": "Therapy, postpartum depression",
     "profile_picture_url": "/images/doctors/ritu_sharma.jpg",
     "rating": 4.9,
     "review_count": 175,
-    "location": "Delhi",
+    "language_spoken": [
+      "English",
+      "Hindi"
+    ],
+    "location": {
+      "full_address": "Vasant Kunj, New Delhi 110070",
+      "city": "Delhi",
+      "pincode": "110070",
+      "state": "Delhi",
+      "country": "India"
+    },
     "facility_name": "Fortis Hospital",
     "facility_address": "Vasant Kunj, New Delhi 110070",
-    "experience_years": 12,
-    "session_fee": 1400,
-    "currency": "INR",
+    "session": {
+      "available_days": [
+        "mon",
+        "tue",
+        "wed",
+        "thur",
+        "fri"
+      ],
+      "session_fee": 1400,
+      "start_time": "11:00",
+      "end_time": "19:00",
+      "currency": "INR",
+      "buffer_time": 15
+    },
+    "urgent_patient_alerts": {
+      "enable_urgent_alerts": false,
+      "quiet_hours_dnd": {
+        "start_time": "22:00",
+        "end_time": "06:00"
+      }
+    },
     "available_for_booking": true,
     "active": true,
     "verified": true
   },
   {
-    "name": "Dr. Meera Iyer",
-    "email": "meera.iyer@afterma.app",
-    "password": "Password@123",
-    "phone": "+91-9812340006",
-    "registration_number": "MCI-993456221",
+    "name": "Dr. Sasmita Mishra",
+    "gender": "F",
+    "practice_type": "hospital",
+    "email": "sasmita.mishra@afterma.app",
+    "phone": "9812340101",
+    "certifications_license": {
+      "registration_number": "MCI-234567891",
+      "licensing_authority": "Medical Council of India",
+      "specialty": "OBGYN",
+      "experience_years": 13,
+      "clinic_hospital_affiliation": "KIMS Hospital",
+      "supporting_documents": []
+    },
+    "password_hash": "Password@123",
+    "agree_on_documentations": true,
     "specialization": "OBGYN",
-    "sub_specialty": "High Risk Pregnancy",
-    "designation": "Senior Obstetrician",
-    "credentials": "MD Obstetrics",
-    "quote": "Safe pregnancies need constant care and monitoring.",
-    "profile_picture_url": "/images/doctors/meera_iyer.jpg",
-    "rating": 4.8,
-    "review_count": 198,
-    "location": "Chennai",
-    "facility_name": "Apollo Hospitals",
-    "facility_address": "Greams Rd, Chennai 600006",
-    "experience_years": 15,
-    "session_fee": 1600,
-    "currency": "INR",
-    "available_for_booking": true,
-    "active": true,
-    "verified": true
-  },
-  {
-    "name": "Dr. Pooja Deshmukh",
-    "email": "pooja.deshmukh@afterma.app",
-    "password": "Password@123",
-    "phone": "+91-9812340007",
-    "registration_number": "MCI-774512332",
-    "specialization": "Physiotherapy",
-    "sub_specialty": "Core Rehabilitation",
-    "designation": "Pelvic Floor Therapist",
-    "credentials": "MPT Rehabilitation",
-    "quote": "Strong pelvic muscles restore confidence and strength.",
-    "profile_picture_url": "/images/doctors/pooja_deshmukh.jpg",
-    "rating": 4.7,
-    "review_count": 110,
-    "location": "Nagpur",
-    "facility_name": "Care Hospital",
-    "facility_address": "Civil Lines, Nagpur 440001",
-    "experience_years": 8,
-    "session_fee": 1000,
-    "currency": "INR",
-    "available_for_booking": true,
-    "active": true,
-    "verified": true
-  },
-  {
-    "name": "Dr. Sneha Patel",
-    "email": "sneha.patel@afterma.app",
-    "password": "Password@123",
-    "phone": "+91-9812340008",
-    "registration_number": "MCI-448902331",
-    "specialization": "Gynecology",
-    "sub_specialty": "Menstrual Health",
-    "designation": "Women's Health Specialist",
-    "credentials": "MD Gynecology",
-    "quote": "Understanding cycles helps women understand their health.",
-    "profile_picture_url": "/images/doctors/sneha_patel.jpg",
-    "rating": 4.8,
-    "review_count": 156,
-    "location": "Ahmedabad",
-    "facility_name": "Sterling Hospital",
-    "facility_address": "Memnagar, Ahmedabad 380052",
-    "experience_years": 10,
-    "session_fee": 1100,
-    "currency": "INR",
-    "available_for_booking": true,
-    "active": true,
-    "verified": true
-  },
-  {
-    "name": "Dr. Radhika Nair",
-    "email": "radhika.nair@afterma.app",
-    "password": "Password@123",
-    "phone": "+91-9812340009",
-    "registration_number": "MCI-654332198",
-    "specialization": "Hormonal Disorders",
-    "sub_specialty": "Thyroid & PCOS",
-    "designation": "Endocrinologist",
-    "credentials": "DM Endocrinology",
-    "quote": "Hormones influence every phase of a woman's health.",
-    "profile_picture_url": "/images/doctors/radhika_nair.jpg",
-    "rating": 4.9,
-    "review_count": 178,
-    "location": "Kochi",
-    "facility_name": "Aster Medcity",
-    "facility_address": "Cheranallur, Kochi 682027",
-    "experience_years": 13,
-    "session_fee": 1500,
-    "currency": "INR",
-    "available_for_booking": true,
-    "active": true,
-    "verified": true
-  },
-  {
-    "name": "Dr. Priyanka Verma",
-    "email": "priyanka.verma@afterma.app",
-    "password": "Password@123",
-    "phone": "+91-9812340010",
-    "registration_number": "MCI-992314781",
-    "specialization": "OBGYN",
-    "sub_specialty": "Postpartum Recovery",
+    "sub_specialty": "Maternal Health",
     "designation": "Senior Gynecologist",
-    "credentials": "MS Obstetrics",
-    "quote": "Recovery after birth deserves the same attention as pregnancy.",
-    "profile_picture_url": "/images/doctors/priyanka_verma.jpg",
+    "credentials": "MS OBGYN",
+    "quote": "Empowering mothers with care.",
+    "short_biography": "Experienced gynecologist in maternal health.",
+    "area_of_expertise": "Pregnancy care",
+    "profile_picture_url": "/images/doctors/sasmita.jpg",
     "rating": 4.8,
-    "review_count": 165,
-    "location": "Lucknow",
-    "facility_name": "Medanta Hospital",
-    "facility_address": "Gomti Nagar, Lucknow 226010",
-    "experience_years": 12,
-    "session_fee": 1400,
-    "currency": "INR",
+    "review_count": 150,
+    "language_spoken": [
+      "English",
+      "Hindi",
+      "Odia"
+    ],
+    "location": {
+      "full_address": "Patia, Bhubaneswar 751024",
+      "city": "Bhubaneswar",
+      "pincode": "751024",
+      "state": "Odisha",
+      "country": "India"
+    },
+    "facility_name": "KIMS Hospital",
+    "facility_address": "Patia, Bhubaneswar",
+    "session": {
+      "available_days": [
+        "mon",
+        "tue",
+        "wed",
+        "thur",
+        "fri"
+      ],
+      "session_fee": 1200,
+      "start_time": "09:00",
+      "end_time": "17:00",
+      "currency": "INR",
+      "buffer_time": 15
+    },
+    "urgent_patient_alerts": {
+      "enable_urgent_alerts": false,
+      "quiet_hours_dnd": {
+        "start_time": "22:00",
+        "end_time": "06:00"
+      }
+    },
+    "available_for_booking": true,
+    "active": true,
+    "verified": true
+  },
+  {
+    "name": "Dr. Prakash Nayak",
+    "gender": "M",
+    "practice_type": "clinic",
+    "email": "prakash.nayak@afterma.app",
+    "phone": "9812340102",
+    "certifications_license": {
+      "registration_number": "MCI-345678912",
+      "licensing_authority": "Medical Council of India",
+      "specialty": "Pediatrics",
+      "experience_years": 10,
+      "clinic_hospital_affiliation": "SUM Hospital",
+      "supporting_documents": []
+    },
+    "password_hash": "Password@123",
+    "agree_on_documentations": true,
+    "specialization": "Pediatrics",
+    "designation": "Child Specialist",
+    "credentials": "MD Pediatrics",
+    "area_of_expertise": "Child health, vaccination",
+    "profile_picture_url": "/images/doctors/prakash.jpg",
+    "rating": 4.6,
+    "review_count": 120,
+    "language_spoken": [
+      "English",
+      "Odia"
+    ],
+    "location": {
+      "full_address": "Khandagiri, Bhubaneswar 751030",
+      "city": "Bhubaneswar",
+      "pincode": "751030",
+      "state": "Odisha",
+      "country": "India"
+    },
+    "facility_name": "SUM Hospital",
+    "facility_address": "Khandagiri",
+    "session": {
+      "available_days": [
+        "mon",
+        "wed",
+        "fri"
+      ],
+      "session_fee": 800,
+      "start_time": "10:00",
+      "end_time": "16:00",
+      "currency": "INR",
+      "buffer_time": 10
+    },
+    "urgent_patient_alerts": {
+      "enable_urgent_alerts": false,
+      "quiet_hours_dnd": {
+        "start_time": "22:00",
+        "end_time": "06:00"
+      }
+    },
+    "available_for_booking": true,
+    "active": true,
+    "verified": true
+  },
+  {
+    "name": "Dr. Ananya Das",
+    "gender": "F",
+    "practice_type": "hospital",
+    "email": "ananya.das@afterma.app",
+    "phone": "9812340103",
+    "certifications_license": {
+      "registration_number": "MCI-456789123",
+      "licensing_authority": "Medical Council of India",
+      "specialty": "Dermatology",
+      "experience_years": 9,
+      "clinic_hospital_affiliation": "Apollo Hospital",
+      "supporting_documents": []
+    },
+    "password_hash": "Password@123",
+    "agree_on_documentations": true,
+    "specialization": "Dermatology",
+    "designation": "Skin Specialist",
+    "credentials": "MD Dermatology",
+    "area_of_expertise": "Skin treatment",
+    "profile_picture_url": "/images/doctors/ananya.jpg",
+    "rating": 4.5,
+    "review_count": 95,
+    "language_spoken": [
+      "English",
+      "Hindi"
+    ],
+    "location": {
+      "full_address": "Jaydev Vihar, Bhubaneswar 751013",
+      "city": "Bhubaneswar",
+      "pincode": "751013",
+      "state": "Odisha",
+      "country": "India"
+    },
+    "facility_name": "Apollo Hospital",
+    "facility_address": "Jaydev Vihar",
+    "session": {
+      "available_days": [
+        "tue",
+        "thur",
+        "sat"
+      ],
+      "session_fee": 900,
+      "start_time": "11:00",
+      "end_time": "17:00",
+      "currency": "INR",
+      "buffer_time": 10
+    },
+    "urgent_patient_alerts": {
+      "enable_urgent_alerts": false,
+      "quiet_hours_dnd": {
+        "start_time": "22:00",
+        "end_time": "06:00"
+      }
+    },
     "available_for_booking": true,
     "active": true,
     "verified": true
