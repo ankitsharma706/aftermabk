@@ -1,243 +1,138 @@
-# 🌸 AFTERMA Backend — Complete API Reference
+# AFTERMA API reference
 
-**Base URL:** `http://localhost:5000`  
-**All protected routes require:** `Authorization: Bearer <token>`
+Base URL: `http://localhost:5000`
 
----
+Protected endpoints require `Authorization: Bearer <JWT>`. User and doctor tokens are supported where an endpoint requires authentication. Unless noted otherwise, successful reads and updates return `200`, creates return `201`, and missing records return `404`. The route inventory below reflects the routes mounted by `server.js`; operations not listed are not implemented.
 
-## 🔐 Auth (`/api/auth`)
+## Authentication — `/api/auth`
 
-| Method | Endpoint | Access | Description |
-|--------|----------|--------|-------------|
-| `POST` | `/api/auth/register` | Public | Register new user |
-| `POST` | `/api/auth/login` | Public | Login and get token |
-| `GET` | `/api/auth/me` | Protected | Get logged-in user info |
-| `POST` | `/api/auth/refresh` | Public | Refresh JWT token |
-| `PATCH` | `/api/auth/change-password` | Protected | Change password |
-| `POST` | `/api/auth/send-otp` | Public | Send phone OTP |
-| `POST` | `/api/auth/verify-otp` | Public | Verify phone OTP |
+| Method | Path | Access | Behavior |
+|---|---|---|---|
+| `POST` | `/register` | Public | Register a user |
+| `POST` | `/login` | Public | Authenticate a user |
+| `POST` | `/google` | Public | Authenticate with Google |
+| `GET` | `/me` | Protected | Get the authenticated user's profile |
+| `POST` | `/doctor/register` | Public | Register a doctor |
+| `POST` | `/doctor/login` | Public | Authenticate a doctor |
 
----
+Token refresh, OTP, and password-change endpoints are not registered under `/api/auth`.
 
-## 👩 User (`/api/user` or `/api/users`)
+## Users — `/api/users`
 
-| Method | Endpoint | Access | Description |
-|--------|----------|--------|-------------|
-| `POST` | `/api/user` | Admin | Create a user directly |
-| `GET` | `/api/user` | Admin | Get all users (paginated) |
-| `GET` | `/api/user/{{id}}` | Owner/Admin | Get user by ID |
-| `POST` | `/api/user/{{id}}` | Owner/Admin | Update user profile (POST alias) |
-| `PATCH` | `/api/user/{{id}}` | Owner/Admin | Update user profile |
-| `DELETE` | `/api/user/{{id}}` | Owner/Admin | Delete user account |
-| `POST` | `/api/user/{{id}}/role` | Admin | Change user role (`user`/`admin`/`doctor`) |
-| `GET` | `/api/user/me/calendar` | Protected | Get cycle calendar |
-| `POST` | `/api/user/me/calendar` | Protected | Log calendar event |
-| `DELETE` | `/api/user/me/calendar/{{eventId}}` | Protected | Delete calendar event |
+| Method | Path | Access | Behavior |
+|---|---|---|---|
+| `GET` | `/me` | Protected | Read the authenticated user's profile |
+| `PATCH` | `/me` | Protected | Update allowed profile fields |
+| `DELETE` | `/me` | Protected | Deactivate the authenticated user's account (`is_active: false`) |
+| `GET` | `/` | Admin | List users; supports `role`, `phase`, `active`, `page`, and `limit` |
+| `GET` | `/:id` | Admin | Read a user |
+| `PATCH` | `/:id` | Admin | Update allowed profile fields, `role`, and `is_active` |
+| `DELETE` | `/:id` | Admin | Permanently delete a user |
 
-**Update body (sample):**
-```json
-{
-  "full_name": "Anjali Sharma",
-  "email": "anjali@example.com",
-  "maternity_stage": "Postpartum",
-  "delivery_method": "Vaginal Delivery",
-  "privacy_mode": "Public",
-  "allergies": ["apple", "dalma"],
-  "medical_history": []
-}
-```
+User creation is not exposed as a users CRUD endpoint; user accounts are created through `POST /api/auth/register`.
 
-**Change Role body:**
-```json
-{ "role": "admin" }
-```
+## Doctors — `/api/doctors`
 
----
+| Method | Path | Access | Behavior |
+|---|---|---|---|
+| `GET` | `/` | Public | List active doctors; supports `specialization`, `location`, `available`, `page`, and `limit` |
+| `GET` | `/:id` | Public | Read an active doctor |
+| `POST` | `/` | Admin | Create a doctor profile |
+| `PATCH` | `/:id` | Admin | Update allowed doctor fields |
+| `DELETE` | `/:id` | Admin | Soft-delete by setting `active: false` |
+| `DELETE` | `/:id/hard` | Admin | Permanently delete a doctor |
+| `GET` | `/me` | Doctor | Read the authenticated doctor's profile |
+| `PATCH` | `/me` | Doctor | Update allowed profile fields; cannot self-verify or self-deactivate |
+| `PATCH` | `/me/password` | Doctor | Change the authenticated doctor's password |
+| `DELETE` | `/me` | Doctor | Deactivate the authenticated doctor's account |
 
-## 🩺 Doctor (`/api/doctor` or `/api/doctors`)
+## Sessions — `/api/sessions`
 
-| Method | Endpoint | Access | Description |
-|--------|----------|--------|-------------|
-| `GET` | `/api/doctor` | Public | Get all doctors (paginated + filters) |
-| `GET` | `/api/doctor/{{id}}` | Public | Get doctor by ID |
-| `POST` | `/api/doctor` | Admin | Create doctor profile |
-| `PATCH` | `/api/doctor/{{id}}` | Admin | Update doctor |
-| `DELETE` | `/api/doctor/{{id}}` | Admin | Delete doctor |
+| Method | Path | Access | Behavior |
+|---|---|---|---|
+| `POST` | `/` | Protected | Book a session |
+| `GET` | `/me` | Protected | List the authenticated user's sessions |
+| `PATCH` | `/:id/cancel` | Protected | Cancel the authenticated user's session |
+| `GET` | `/` | Admin | List all sessions |
 
-**Query params:** `?specialization=OBGYN&city=Delhi&rating_min=4.5&search=Kavitha`
+Reading one session by ID, general session updates, and session deletion are not implemented.
 
-**Create body:**
-```json
-{
-  "name": "Dr. Kavitha Menon",
-  "email": "kavitha@hospital.com",
-  "specialization": "OBGYN",
-  "experience_years": 14,
-  "session_fee": 1500,
-  "hospital": "Apollo Hospitals",
-  "city": "Delhi",
-  "registration_number": "MCI-983452112"
-}
-```
+## Daily logs — `/api/logs`
 
----
+| Method | Path | Access | Behavior |
+|---|---|---|---|
+| `POST` | `/` | Protected | Create or upsert the authenticated user's log for a date |
+| `GET` | `/me` | Protected | List the authenticated user's logs; `limit` defaults to 30 |
 
-## 📅 Sessions (`/api/session` or `/api/sessions`)
+Reading, updating, or deleting an individual daily log is not implemented.
 
-| Method | Endpoint | Access | Description |
-|--------|----------|--------|-------------|
-| `POST` | `/api/session` | Protected | Book a new session |
-| `GET` | `/api/session` | Admin | Get all sessions |
-| `GET` | `/api/session/me` | Protected | Get my sessions |
-| `GET` | `/api/session/doctor/{{doctorId}}` | Admin/Doctor | Get doctor's sessions |
-| `GET` | `/api/session/{{id}}` | Protected | Get session by ID |
-| `PATCH` | `/api/session/{{id}}` | Protected | Update session details |
-| `POST` | `/api/session/{{id}}/cancel` | Protected | Cancel a session |
-| `DELETE` | `/api/session/{{id}}` | Admin | Delete session record |
+## Lactation logs — `/api/lactation`
 
-**Book session body:**
-```json
-{
-  "doctor_id": "{{doctorId}}",
-  "session_date": "2026-03-15",
-  "session_time": "10:00",
-  "session_type": "video",
-  "session_fee": 1200
-}
-```
+| Method | Path | Access | Behavior |
+|---|---|---|---|
+| `POST` | `/` | Protected | Create a log for the authenticated user |
+| `GET` | `/me` | Protected | List the authenticated user's logs |
+| `DELETE` | `/:id` | Protected | Delete a log belonging to the authenticated user |
 
-**Cancel session body:**
-```json
-{ "reason": "Personal emergency" }
-```
+Updating an existing lactation log is not implemented.
 
-**Filter my sessions:** `GET /api/session/me?session_status=upcoming`
+## Period logs — `/api/period`
 
----
+| Method | Path | Access | Behavior |
+|---|---|---|---|
+| `POST` | `/` | Protected | Create a cycle log for the authenticated user |
+| `GET` | `/me` | Protected | List the authenticated user's logs |
+| `PATCH` | `/:id` | Protected | Update a log belonging to the authenticated user |
 
-## 🩸 Period Tracking (`/api/period`)
+Deleting a period log is not implemented.
 
-| Method | Endpoint | Access | Description |
-|--------|----------|--------|-------------|
-| `POST` | `/api/period` | Protected | Create period record |
-| `GET` | `/api/period/me` | Protected | Get my period data |
-| `GET` | `/api/period/user/{{userId}}` | Admin/Doctor | Get user's period data |
-| `POST` | `/api/period/cycle` | Protected | Add a new cycle entry |
-| `PATCH` | `/api/period` | Protected | Update cycle settings/predictions |
-| `DELETE` | `/api/period` | Protected | Delete period record |
+## Communities — `/api/communities`
 
-**Create body:**
-```json
-{
-  "cycle_settings": {
-    "average_cycle_length_days": 28,
-    "average_period_length_days": 5,
-    "cycle_variance_days": 2
-  }
-}
-```
+| Method | Path | Access | Behavior |
+|---|---|---|---|
+| `GET` | `/` | Public | List active communities |
+| `PATCH` | `/:id/join` | Protected | Increment the community member count |
+| `PATCH` | `/:id/leave` | Protected | Decrement the community member count |
 
-**Add cycle body:**
-```json
-{
-  "period_start_date": "2026-01-02",
-  "period_end_date": "2026-01-06",
-  "flow_pattern": "medium",
-  "symptoms_reported": ["cramps", "fatigue"],
-  "daily_flow": [
-    { "day": 1, "flow": "heavy", "pain_level": 5 },
-    { "day": 2, "flow": "medium", "pain_level": 3 }
-  ]
-}
-```
+Community creation, individual reads, updates, and deletion are not implemented. Join and leave update only the aggregate member count; membership is not tracked.
 
----
+## Medicines — `/api/medicines`
 
-## 🏥 Medical Profile (`/api/medical-profile`)
+| Method | Path | Access | Behavior |
+|---|---|---|---|
+| `GET` | `/` | Public | List active medicines |
 
-| Method | Endpoint | Access | Description |
-|--------|----------|--------|-------------|
-| `POST` | `/api/medical-profile` | Protected | Create medical profile |
-| `GET` | `/api/medical-profile/me` | Protected | Get my medical profile |
-| `GET` | `/api/medical-profile/user/{{userId}}` | Admin/Doctor | Get user's medical profile |
-| `PATCH` | `/api/medical-profile/me` | Protected | Update my profile |
-| `PATCH` | `/api/medical-profile/user/{{userId}}/labs` | Admin/Doctor | Update lab values |
-| `DELETE` | `/api/medical-profile/me` | Protected | Delete profile |
+Medicine creation, individual reads, updates, and deletion are not implemented.
 
-**Create/Update body:**
-```json
-{
-  "blood_group": "B+",
-  "weight_kg": 58,
-  "height_cm": 161,
-  "city": "New Delhi",
-  "state": "Delhi",
-  "symptoms": ["fatigue", "back_pain", "dizziness"],
-  "current_conditions": ["anemia", "vitamin D deficiency"],
-  "allergies": ["Penicillin"],
-  "family": {
-    "primary_contact_name": "Rohit Sharma",
-    "primary_contact_number": "+91-9123456789",
-    "relationship": "Husband"
-  }
-}
-```
+## NGOs — `/api/ngos`
 
-**Update labs body (doctor fills this):**
-```json
-{
-  "haemoglobin_level": 10.8,
-  "thyroid_level": 2.8,
-  "vitamin_d3_level": 18,
-  "glucose_level": 88,
-  "ferritin_level": 9,
-  "lab_risk_assessment": {
-    "hemoglobin_status": "low",
-    "ferritin_status": "low",
-    "vitamin_d_status": "deficient",
-    "thyroid_status": "normal",
-    "glucose_status": "normal"
-  }
-}
-```
+| Method | Path | Access | Behavior |
+|---|---|---|---|
+| `GET` | `/` | Public | List NGOs with `active_support: true` |
 
----
+NGO creation, individual reads, updates, and deletion are not implemented.
 
-## 💊 Medicines (`/api/medicine` or `/api/medicines`)
+## Insurance plans — `/api/insurance`
 
-| Method | Endpoint | Access | Description |
-|--------|----------|--------|-------------|
-| `GET` | `/api/medicine` | Public | Get all medicines (filterable) |
-| `GET` | `/api/medicine/{{id}}` | Public | Get medicine by ID |
-| `POST` | `/api/medicine` | Admin | Add medicine to catalog |
-| `PATCH` | `/api/medicine/{{id}}` | Admin | Update medicine |
-| `DELETE` | `/api/medicine/{{id}}` | Admin | Delete medicine |
+| Method | Path | Access | Behavior |
+|---|---|---|---|
+| `GET` | `/` | Public | List active insurance plans |
 
-**Query params:** `?category=Iron+Folic+Acid&search=Ferrous`
+Insurance-plan creation, individual reads, updates, and deletion are not implemented.
 
-**Create body:**
-```json
-{
-  "category": "Iron + Folic Acid",
-  "name": "Ferrous Sulphate",
-  "dose": "200 mg",
-  "frequency": "1 tablet once daily",
-  "instructions": "After food",
-  "duration": "8 weeks",
-  "purpose": "Iron deficiency treatment"
-}
-```
+## Questions — `/api/questions`
 
----
+| Method | Path | Access | Behavior |
+|---|---|---|---|
+| `GET` | `/` | Public | List questions; supports `category`, `search`, `sort`, `limit`, and `page` |
+| `GET` | `/:id` | Public | Read a question and increment its view count |
+| `POST` | `/` | Protected | Create a question |
+| `POST` | `/:id/answer` | Protected | Add an answer |
+| `PATCH` | `/:id/upvote` | Protected | Increment the upvote count |
+| `DELETE` | `/:id` | Protected | Delete a question owned by the caller; admins may delete any question |
 
-## 📓 Daily Logs (`/api/logs`)
-| `POST /api/logs` | `GET /api/logs` | `GET /api/logs/{{id}}` | `PATCH /api/logs/{{id}}` | `DELETE /api/logs/{{id}}`
+Updating an existing question is not implemented.
 
-## 🤝 Communities (`/api/communities`)
-| `GET /api/communities` | `GET /api/communities/{{id}}` | `POST` | `PATCH` | `DELETE`
+## Other resources
 
-## 🏛️ NGOs (`/api/ngos`)
-| `GET /api/ngos` | `GET /api/ngos/{{id}}` | `POST` | `PATCH` | `DELETE`
-
-## 🏦 Insurance (`/api/insurance`)
-| `GET /api/insurance` | `GET /api/insurance/{{id}}` | `POST` | `PATCH` | `DELETE`
+No `/api/medical-profile` routes are mounted. Calendar routes are not registered under `/api/users`; those resources are not part of the current API route surface.
