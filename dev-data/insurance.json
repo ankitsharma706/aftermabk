@@ -1,0 +1,162 @@
+[
+  {
+    "scheme_name": "Ayushman Bharat PM-JAY",
+    "bank_name": "Government of India",
+    "description": "Provides health insurance coverage for economically weaker families.",
+    "eligibility": "Families identified based on SECC database.",
+    "coverage": "Up to ₹5,00,000 per family per year for secondary and tertiary care.",
+    "active": true
+  },
+  {
+    "scheme_name": "Rashtriya Swasthya Bima Yojana",
+    "bank_name": "Government of India",
+    "description": "Health insurance scheme for BPL families.",
+    "eligibility": "Below poverty line families.",
+    "coverage": "₹30,000 annual coverage for hospitalization.",
+    "active": true
+  },
+  {
+    "scheme_name": "ICICI Lombard Complete Health Insurance",
+    "bank_name": "ICICI Bank",
+    "description": "Comprehensive health insurance including maternity benefits.",
+    "eligibility": "Individuals aged 18-65.",
+    "coverage": "₹1,00,000 – ₹10,00,000 coverage.",
+    "active": true
+  },
+  {
+    "scheme_name": "HDFC ERGO Health Suraksha",
+    "bank_name": "HDFC Bank",
+    "description": "Offers coverage for hospitalization and maternity expenses.",
+    "eligibility": "Individuals and families.",
+    "coverage": "₹3,00,000 – ₹10,00,000.",
+    "active": true
+  },
+  {
+    "scheme_name": "Star Health Family Health Optima",
+    "bank_name": "Star Health",
+    "description": "Family floater plan with maternity coverage.",
+    "eligibility": "Families with dependent members.",
+    "coverage": "₹2,00,000 – ₹25,00,000.",
+    "active": true
+  },
+  {
+    "scheme_name": "Max Bupa Health Companion",
+    "bank_name": "Max Bupa",
+    "description": "Comprehensive coverage including pregnancy-related expenses.",
+    "eligibility": "Adults aged 18-65.",
+    "coverage": "₹3,00,000 – ₹1,00,00,000.",
+    "active": true
+  },
+  {
+    "scheme_name": "Reliance Health Gain Policy",
+    "bank_name": "Reliance General Insurance",
+    "description": "Health insurance with maternity benefits after waiting period.",
+    "eligibility": "Individuals and families.",
+    "coverage": "₹3,00,000 – ₹50,00,000.",
+    "active": true
+  },
+  {
+    "scheme_name": "Care Health Joy Plan",
+    "bank_name": "Care Insurance",
+    "description": "Maternity-focused health insurance plan.",
+    "eligibility": "Couples planning childbirth.",
+    "coverage": "₹3,00,000 – ₹10,00,000.",
+    "active": true
+  },
+  {
+    "scheme_name": "Aditya Birla Active Assure",
+    "bank_name": "Aditya Birla Capital",
+    "description": "Covers hospitalization and maternity benefits.",
+    "eligibility": "Individuals aged 18-65.",
+    "coverage": "₹2,00,000 – ₹20,00,000.",
+    "active": true
+  },
+  {
+    "scheme_name": "ManipalCigna ProHealth Plus",
+    "bank_name": "ManipalCigna",
+    "description": "Comprehensive health plan with maternity add-on.",
+    "eligibility": "Individuals and families.",
+    "coverage": "₹3,00,000 – ₹1 crore.",
+    "active": true
+  },
+  {
+    "scheme_name": "Kotak Health Shield",
+    "bank_name": "Kotak Mahindra Bank",
+    "description": "Offers hospitalization and maternity coverage.",
+    "eligibility": "Individuals aged 18+.",
+    "coverage": "₹5,00,000 – ₹25,00,000.",
+    "active": true
+  },
+  {
+    "scheme_name": "Tata AIG Medicare",
+    "bank_name": "Tata AIG",
+    "description": "Health insurance with optional maternity coverage.",
+    "eligibility": "Individuals and families.",
+    "coverage": "₹2,00,000 – ₹20,00,000.",
+    "active": true
+  },
+  {
+    "scheme_name": "Future Generali Health Total",
+    "bank_name": "Future Generali",
+    "description": "Health plan with maternity and newborn coverage.",
+    "eligibility": "Individuals aged 18-65.",
+    "coverage": "₹3,00,000 – ₹50,00,000.",
+    "active": true
+  },
+  {
+    "scheme_name": "National Parivar Mediclaim Plus",
+    "bank_name": "National Insurance",
+    "description": "Family health insurance including maternity.",
+    "eligibility": "Families with dependents.",
+    "coverage": "₹2,00,000 – ₹10,00,000.",
+    "active": true
+  },
+  {
+    "scheme_name": "Oriental Happy Family Floater",
+    "bank_name": "Oriental Insurance",
+    "description": "Family floater with maternity benefits.",
+    "eligibility": "Families.",
+    "coverage": "₹3,00,000 – ₹20,00,000.",
+    "active": true
+  },
+  {
+    "scheme_name": "United India Family Medicare",
+    "bank_name": "United India Insurance",
+    "description": "Health insurance for families with maternity coverage.",
+    "eligibility": "Families aged 18+.",
+    "coverage": "₹2,00,000 – ₹10,00,000.",
+    "active": true
+  },
+  {
+    "scheme_name": "LIC Jeevan Arogya",
+    "bank_name": "LIC",
+    "description": "Health insurance with hospitalization and maternity benefits.",
+    "eligibility": "Individuals aged 18+.",
+    "coverage": "₹1,00,000 – ₹10,00,000.",
+    "active": true
+  },
+  {
+    "scheme_name": "Bajaj Allianz Health Guard",
+    "bank_name": "Bajaj Allianz",
+    "description": "Covers hospitalization and maternity expenses.",
+    "eligibility": "Individuals and families.",
+    "coverage": "₹1,50,000 – ₹50,00,000.",
+    "active": true
+  },
+  {
+    "scheme_name": "SBI Arogya Premier",
+    "bank_name": "SBI",
+    "description": "Premium health insurance with maternity coverage.",
+    "eligibility": "Individuals aged 18-65.",
+    "coverage": "₹5,00,000 – ₹30,00,000.",
+    "active": true
+  },
+  {
+    "scheme_name": "Apollo Munich Easy Health",
+    "bank_name": "Apollo Munich",
+    "description": "Comprehensive health insurance with maternity benefits.",
+    "eligibility": "Individuals and families.",
+    "coverage": "₹3,00,000 – ₹50,00,000.",
+    "active": true
+  }
+]
